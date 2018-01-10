@@ -2,12 +2,13 @@
     ViewBag.Title = "Scheduler";
 }
 @* HTML *@
-<div ng-app="myApp" ng-controller="myNgController">
+<div class="margin-top"> </div>
+<div  ng-app="myApp" ng-controller="myNgController">
     <div class="row">
         <div class="col-md-8">
-            <div id="calendar" ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="myCalendar"></div>
+            <div id="calendar" class="cale"  ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="myCalendar"></div>
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-3">
             <div ng-show="SelectedEvent" class="alert alert-success" style="margin-top:50px">
                 <h2 style="margin-top:0px"> Selected Event:</h2>
                 <h3 style="color:#A9A50E">{{SelectedEvent.title}}</h3>
@@ -17,15 +18,5 @@
     </div>
 </div>
 
-@* CSS *@
-<link href="~/Content/fullcalendar.css" rel="stylesheet" />
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
-@* JS *@
-<script src="~/Scripts/calendar/moment.js"></script>
-@*<script src="~/Scripts/jquery-1.11.3.js"></script>*@
-<script src="~/Scripts/calendar/angular.js"></script>
-<script src="~/Scripts/calendar/calendar.js"></script>
-<script src="~/Scripts/calendar/fullcalendar.js"></script>
-<script src="~/Scripts/calendar/gcal.js"></script>
 @* OUR ANGULAR COMPONENTs *@
 <script src="~/Scripts/calendar/MyApp.js"></script>

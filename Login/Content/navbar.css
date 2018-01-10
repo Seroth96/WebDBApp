@@ -1,0 +1,28 @@
+﻿.navbar-brand {  
+  font-family:'Facebook Letter Faces';
+  color: #fff !important;
+
+}
+
+.navbar-collapse {
+    background-color: #000;
+    border-color: #eeeeee;
+    
+}
+.navbar-brand> li > a:hover, .navbar-brand > li > a:focus,
+.nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: #808080 !important;
+}
+.navbar-collapse .navbar-text {  
+  color: #fff;  
+   background-color:transparent;  
+}  
+  
+.navbar-collapse .navbar-nav > li > a {  
+  color: white !important;  
+  font-family:Arial;  
+  font-size:15px;  
+  background-color:transparent;  
+}  
+  

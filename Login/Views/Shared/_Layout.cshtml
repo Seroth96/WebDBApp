@@ -5,20 +5,36 @@
     <meta name="viewport" content="width=device-width" />
     <link href="~/Content/main.css" type="text/css" rel="stylesheet" />
     <link href="~/Content/home.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/fullcalendar.min.css" rel="stylesheet" />
+    <link href="~/Content/navbar.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.css" type="text/css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css" rel="stylesheet" />
-    <script src="/Scripts/jquery-3.1.1.js"></script>
+    <script src="~/Scripts/jquery-3.2.1.js"></script>
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/lib/jquery.min.js"></script>
+    <script src="~/Scripts/lib/jquery-ui.min.js"></script>
     <script src="/Scripts/jquery.validate.min.js" type="text/javascript"></script>
     <script src="/scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
     <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-ui-router.min.js"></script>
+    <script src="~/Scripts/moment-with-locales.min.js"></script>
+    <script src="~/Scripts/fullcalendar.min.js"></script>
+    <script src="~/Scripts/calendar/calendar.js"></script>
+    <script src="~/Scripts/gcal.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap.min.js"></script>
     <script type="text/javascript" src="@Url.Content("/Scripts/Login/main.js")"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
     <title>@ViewBag.Title</title>
 </head>
 <body>
-    @Html.ActionLink("BAIM", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    @*@Html.ActionLink("MTAB", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
+            <li>
+                <span class="navbar-brand">MTAB</span>
+            </li>
             <li>
                 <a href="@Url.Action("Index", "Home")">
                     <span class="glyphicon glyphicon-home"></span>
@@ -33,22 +49,22 @@
             </li>
             <li>
                 <a href="@Url.Action("Index", "Calendar")">
+                    <span class="glyphicon glyphicon-calendar"></span>
                     Scheduler
                 </a>
             </li>
-            @*<li>
-                <a href="@Url.Action("Search", "Home")">
-                    Search
-                </a>
-            </li>*@
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="@Url.Action("Logout", "Login" )">
+                    Log out
+                    <span class="glyphicon glyphicon-log-out"></span>
+                </a>
+            </li>
+        </ul> 
     </div>
-    @*@{Html.RenderPartial(ViewHelper.GetViewUrl(View.Navbar));}*@
     <div id="viewContent">
         @RenderBody()
     </div>
-    @*@{Html.RenderPartial(ViewHelper.GetViewUrl(View.Error), string.Empty);}*@
-    @{Html.RenderPartial("~/Views/PartialViews/Loading.cshtml");}
-    @*@{Html.RenderPartial(ViewHelper.GetViewUrl(View.FieldAssociations), new List<CourtCaseField>());}*@
 </body>
 </html>
