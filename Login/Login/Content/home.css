@@ -1,0 +1,78 @@
+﻿.container-fluid {
+    padding: 0px 75px !important;
+}
+
+#title {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    font-size: 30px;
+}
+
+.clear-list {
+    list-style: none;
+    padding-left: 0px;
+}
+
+#content {
+    clear: both;
+    padding-top: 45px;
+}
+
+#home-menu div a {
+    display: block;
+    height: 200px;
+}
+
+#home-menu div[class='col-md-4'] {
+    margin-bottom: 50px;
+}
+
+#home-menu a:hover {
+    opacity: 0.75;
+}
+
+#verticalMenu {
+    height: 200px;
+}
+
+    #verticalMenu li {
+        height: 31%;
+        width: 100%;
+    }
+
+        #verticalMenu li label {
+            position: relative;
+            top: 35%;
+            left: 25px;
+        }
+
+        #verticalMenu li:hover {
+            opacity: 0.75;
+        }
+
+        #verticalMenu li:nth-child(even) {
+            margin-top: 2%;
+            margin-bottom: 2%;
+        }
+
+        #verticalMenu li a {
+            height: 100%;
+        }
+
+.clear-both {
+    clear: both;
+}
+
+nav .container {
+    padding-left: 0px;
+}
+
+#logOutIcon {
+    padding-right: 5px;
+}

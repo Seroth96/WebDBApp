@@ -1,0 +1,29 @@
+﻿<div class="row">
+    <div class="col-md-6" style="float: none; margin: 0 auto;">
+        <div id="errorPlaceHolder"></div>
+    </div>
+</div>
+    <br />
+    <form id="loginForm" action="/Login/Login" method="post">
+
+
+        <label>LOGIN</label>
+        <br />
+
+        @Html.TextBox("login", "", new { @class = "form-control" })
+        <label>HASŁO</label>
+        <br />
+        @Html.Password("password", "", new { @class = "form-control" })
+        <br />
+        <input id="loginSubmitButton" class="btn btn-success" type="button" value="ZALOGUJ" onclick="loginUser();" />
+        <br />
+
+
+    </form>
+    <div id="loginMenu">
+        Nie masz konta? 
+        <a href="/Login/Register" style="text-decoration: underline;">Zarejestruj się.</a>
+        <br />
+        Zapomniałeś hasła? 
+        <a href="/Login/ResetPassword" style="text-decoration: underline;"> Zresetuj je.</a>
+    </div>

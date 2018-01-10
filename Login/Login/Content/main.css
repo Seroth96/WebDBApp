@@ -1,0 +1,180 @@
+﻿/* -------------------------------------- COLORS ------------------------------------------------ 
+    
+    rgba(76, 185,80, 0.85)
+    
+    */
+
+* {
+    font-size: 13px;
+}
+
+.background-main-color {
+    background-color: rgb(76,185,80);
+}
+
+#errors {
+    color: red;
+}
+
+
+h2 {
+    text-transform: uppercase;
+}
+
+a {
+    color: black !important;
+    text-decoration: none;
+}
+
+    a:hover, a:active {
+        text-decoration: none !important;
+    }
+
+.clear-float {
+    clear: both;
+}
+
+.left-flow-menu {
+    position: absolute;
+    top: 50%;
+}
+
+.loading-visible {
+    clear: both;
+    display: table;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(76, 185,80,0.85);
+}
+
+#loadingMessage, #centerErrorContent {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 40px;
+    text-transform: uppercase;
+    color: white;
+    font-weight: bolder;
+}
+
+.float-left {
+    float: left;
+    width: 750px;
+}
+
+.space {
+    clear: both;
+    display: block;
+    width: 100%;
+    margin-top: 0px;
+    padding: 3px 0px;
+}
+
+.navbar-brand {  
+  float: left;  
+  padding: 15px 15px;  
+  font-size: 40px;  
+  line-height: 20px;  
+  font-family:'Facebook Letter Faces'  
+}
+/*------------------------BUTTON-----------------------------------------------------*/
+
+.navbar .nav > li > a:hover {
+    background-color: #e7e7e7 !important;
+}
+
+.navbar form {
+    padding-left: 125px;
+}
+
+.container nav {
+    margin-bottom: 50px;
+}
+
+h2 {
+    margin-bottom: 50px !important;
+}
+
+.menu div[class*='col-md'] {
+    margin-bottom: 25px;
+}
+
+input[type='text'], input[type='password'], textarea {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 2px 5px !important;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.invisible-textbox {
+    visibility: collapse;
+}
+
+input[disabled = 'true'], input[disabled = 'disabled'] {
+    opacity: .5;
+}
+
+.btn[disabled='False'] {
+    opacity: 1 !important;
+}
+
+.add-icon {
+    padding: 8px 10px;
+    font-size: 13px;
+    color: white;
+    border-radius: 2px;
+    background-color: #5cb85c;
+}
+
+.field-validation-error {
+position:relative; 
+}
+
+.field-validation-error span {
+    /*border: 1px solid #ff0000;*/
+    /*padding-top: 8px !important;*/
+    position:absolute;
+	left:0px;
+	padding:5px 8px;
+	background: #f54a4a;
+	color:#fff;
+	z-index:9;
+	font-size: 12px;
+	line-height:18px;
+    display:block;
+    width:150px;
+    word-wrap:break-word;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+.field-validation-error span::before{
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top:6px;
+    left:-15px;
+    border: solid 8px transparent;
+    border-right-color: #f54a4a;
+}
+
+.form-control.input-validation-error { 
+    border: 2px solid #ff0000;
+    font-family: Arial;
+    color: red;
+    background-color: #ffeeee;
+}
+
+.form-control.valid
+{
+background-color: palegreen;
+border: 2px solid green;
+}
