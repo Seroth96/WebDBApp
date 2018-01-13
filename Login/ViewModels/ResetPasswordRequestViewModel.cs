@@ -1,4 +1,4 @@
-﻿using Login.Service_References.Annotation;
+﻿using WebDBApp.Service_References.Annotation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Login.ViewModels
+namespace WebDBApp.ViewModels
 {
     public class ResetPasswordRequestViewModel
     {

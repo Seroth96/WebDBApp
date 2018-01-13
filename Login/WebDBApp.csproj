@@ -77,6 +77,10 @@
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.4.12\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -157,8 +161,12 @@
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="DAL\Repository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
-    <Compile Include="Database\DbContext.cs" />
+    <Compile Include="DAL\RoleRepository.cs" />
+    <Compile Include="DAL\UserRepository.cs" />
+    <Compile Include="Database\AppDbContext.cs" />
     <Compile Include="Enum\SessionElement.cs" />
     <Compile Include="Extensions\EnumExtension.cs" />
     <Compile Include="Extensions\SessionExtension.cs" />
@@ -173,6 +181,9 @@
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CalendarEvent.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="ViewModels\EditUserViewModel.cs" />
+    <Compile Include="ViewModels\ManageUsersViewModel.cs" />
     <Compile Include="ViewModels\ResetPasswordRequestViewModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1045,6 +1056,13 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
@@ -1187,6 +1205,8 @@
     <Content Include="Views\PartialViews\Error.cshtml" />
     <Content Include="Views\Calendar\Index.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

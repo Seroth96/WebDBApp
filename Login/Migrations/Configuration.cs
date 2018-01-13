@@ -1,11 +1,11 @@
-namespace Login.Migrations
+namespace WebDBApp.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<Login.Database.DbContext>
+    using System.Text;
+    internal sealed class Configuration : DbMigrationsConfiguration<WebDBApp.Database.AppDbContext>
     {
         public Configuration()
         {
@@ -13,7 +13,7 @@ namespace Login.Migrations
            // ContextKey = "Login.Database.LoginDbContext";
         }
 
-        protected override void Seed(Login.Database.DbContext context)
+        protected override void Seed(WebDBApp.Database.AppDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
@@ -27,6 +27,21 @@ namespace Login.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            
+            if (!context.Roles.Any(role => role.Name.Equals("Klient")))
+            {
+                byte[] bytes = Encoding.Default.GetBytes("Klient");
+                var myString = Encoding.ASCII.GetString(bytes);
+                context.Roles.Add(new Models.Role { Name = myString });
+            }
+            if (!context.Roles.Any(role => role.Name.Equals("Administrator")))
+            {
+                context.Roles.Add(new Models.Role { Name = "Administrator" });
+            }
+            if (!context.Roles.Any(role => role.Name.Equals("Trener")))
+            {
+                context.Roles.Add(new Models.Role { Name = "Trener" });
+            }
         }
     }
 }

@@ -1,0 +1,47 @@
+﻿@model WebDBApp.ViewModels.ManageUsersViewModel
+
+@{
+    ViewBag.Title = "User Managment";
+}    
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Full Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Role
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var user in Model.Users) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => user.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.Role.Name)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", "Users", new { id=user.Login })">
+                        Edit
+                        <span class="glyphicon glyphicon-edit"></span>
+                </a>
+                </td>
+            <td>
+                <a href="@Url.Action("Freeze", "Users", new { id=user.Login })">
+                    Log out
+                    <span class="glyphicon glyphicon-ban-circle"></span>
+                </a>
+            </td>
+        </tr>
+        }
+
+    </table>

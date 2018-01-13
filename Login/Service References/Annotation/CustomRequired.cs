@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Login.Service_References.Annotation
+namespace WebDBApp.Service_References.Annotation
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public class CustomRequired : RequiredAttribute, IClientValidatable

@@ -1,9 +1,10 @@
-﻿using Login.Database;
-using Login.Extensions;
-using Login.Helpers;
-using Login.Interfaces;
-using Login.Models;
-using Login.ViewModels;
+﻿using WebDBApp.Database;
+using WebDBApp.Extensions;
+using WebDBApp.Helpers;
+using WebDBApp.Interfaces;
+using WebDBApp.Models;
+using WebDBApp.ViewModels;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -14,17 +15,24 @@ using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.UI;
 
-namespace Login.Controllers
+namespace WebDBApp.Controllers
 {
     public class LoginController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         private readonly IHashHelper _hashHelper;
 
         public LoginController(IUnitOfWork unitOfWork,  IHashHelper hashHelper)
         {
             _unitOfWork = unitOfWork;
             _hashHelper = hashHelper;
+            //logger.Trace("Sample trace message");
+            //logger.Debug("Sample debug message");
+            //logger.Info("Sample informational message");
+            //logger.Warn("Sample warning message");
+            //logger.Error("Sample error message");
+            //logger.Fatal("Sample fatal error message");
         }
 
         [HttpGet]
@@ -46,46 +54,24 @@ namespace Login.Controllers
         [HttpPost]
         public ActionResult Login(string login, string password)
         {
-            //  if (!password.Any(c => char.IsUpper(c)) || !password.Any(c => char.IsNumber(c)))
-            //     return Content("Hasło musi zawierać przynajmniej jedną wielką literę i cyfrę");
-            //using (var dbContext = new LoginDbContext())
-            // {
-            // var user = _unitOfWork.UserRepository.All().FirstOrDefault(usr => usr.Login == login && !usr.IsFrozen);
-            User user = null;
-            if (login.Equals("test") && password.Equals("test"))
+            using (var dbContext = new AppDbContext())
             {
-                user = new User();
-                user.Email = "pbokotko@gmail.com";
-                user.FirstName = "Jan";
-                user.LastName = "Testowy";
-                user.Salt = _hashHelper.GetSalt();
-                user.Password = _hashHelper.Compute("test", user.Salt);
-                user.Login = "test";
-                user.PasswordCreated = DateTime.Now;
-            }
-
+                var user = _unitOfWork.UserRepository.All().FirstOrDefault(usr => usr.Login == login && !usr.IsFrozen);
                 if (user == null)
                 {
                     Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    return PartialView("~/Views/PartialViews/Error.cshtml", "Niepoprawny login lub hasło");
+                    return PartialView("~/Views/PartialViews/Error.cshtml", "Niepoprawny login lub hasło, bądź konto jest zamrożone");
                 }
-                if (user.IsPasswordExpired())
-                {
-                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    return PartialView("~/Views/PartialViews/Error.cshtml", "Hasło wygasło. Musisz je zresetować.");
-                }                    
                 if (!string.Equals(_hashHelper.Compute(password, user.Salt), user.Password))
                 {
                     Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     return PartialView("~/Views/PartialViews/Error.cshtml", "Niepoprawny login lub hasło, bądź konto jest zamrożone.");
-
                 }
-                //  if (DateTime.Now.Subtract(user.PasswordCreated.Value).Days > 30)
-                //      return Content("Hasło wygasło, poproś o nowe");
+                
                 FormsAuthentication.SetAuthCookie(user.Login, false);
                 SessionHelper.SetLogin(login);
                 return new EmptyResult();
-           // }
+            }
         }
 
         [HttpGet]
@@ -107,7 +93,8 @@ namespace Login.Controllers
         {
             try
             {
-                //_unitOfWork.UserRepository.Add(viewModel);
+                var role = _unitOfWork.RoleRepository.Find("Klient");
+                _unitOfWork.UserRepository.Add(viewModel,role);
                 
                 EmailHelper.SendEmail(new EmailAccount()
                 {
@@ -116,11 +103,12 @@ namespace Login.Controllers
                     Request = EmailHelper.GetNewAccountCreatedMessage(viewModel)
                 });
 
-                //_unitOfWork.SaveChanges();
+                _unitOfWork.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch (Exception e)
             {
+                logger.Error(e, e.Message);
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return PartialView("~/Views/PartialViews/Error.cshtml", e.Message);
             }
@@ -139,12 +127,13 @@ namespace Login.Controllers
             try
             {
                 resetRequest.Date = DateTime.Now;
-                //_unitOfWork.UserRepository.ResetPassword(resetRequest);
-                //_unitOfWork.SaveChanges();               
+                _unitOfWork.UserRepository.ResetPassword(resetRequest);
+                _unitOfWork.SaveChanges();               
                 return PartialView("~/Views/Login/Index.cshtml");
             }
             catch(Exception e)
             {
+                logger.Error(e, e.Message);
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return PartialView("~/Views/PartialViews/Error.cshtml", e.Message);
             }            
@@ -153,8 +142,7 @@ namespace Login.Controllers
         [OutputCache(Location = OutputCacheLocation.None, NoStore = true)]
         public JsonResult IsEmail_Available(string email)
         {
-            //if (!_unitOfWork.UserRepository.All().Any(user => user.Email == email))
-            if (!email.Equals("pbokotko@gmail.com"))//TODO: zmienić, żeby sprawdzało email
+            if (!_unitOfWork.UserRepository.All().Any(user => user.Email == email))
             {
                 return Json(true, JsonRequestBehavior.AllowGet);
             }              
@@ -168,8 +156,7 @@ namespace Login.Controllers
         [OutputCache(Location = OutputCacheLocation.None, NoStore = true)]
         public JsonResult IsLogin_Available(string login)
         {
-
-            if (!login.Equals("test"))//TODO: zmienić, żeby sprawdzało login
+            if (!_unitOfWork.UserRepository.All().Any(user => user.Login == login))
             {
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
@@ -181,7 +168,7 @@ namespace Login.Controllers
             for (int i = 1; i < 100; i++)
             {
                 string altCandidate = login + rnd.Next(i, i + 1000).ToString();
-                if (altCandidate.Equals("test"))//TODO: zmienić, żeby sprawdzało login
+                if (!_unitOfWork.UserRepository.All().Any(user => user.Login == altCandidate))
                 {
                     suggestedLogin = String.Format(CultureInfo.InvariantCulture,
                    "{0} jest niedostępny. Spróbuj {1}.", login, altCandidate);

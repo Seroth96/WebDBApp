@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Xml.Serialization;
 
-namespace Login.Models
+namespace WebDBApp.Models
 {
     public class User
     {
@@ -35,7 +35,13 @@ namespace Login.Models
         [XmlIgnore]
         [Required]
         public string Email { get; set; }
-        
+        [XmlIgnore]
+        [Required]
+        public bool IsFrozen { get; set; } = false;
+
+        [Required]
+        virtual public Role Role { get; set; }
+
         [NotMapped]
         [XmlElement("Name")]
         public string FullName
@@ -44,16 +50,7 @@ namespace Login.Models
             set
             {
             }
-        }
-
-        /// <summary>
-        /// Może by wymagać reset hasła co 30 dni albo coś takiego?
-        /// </summary>
-        /// <returns></returns>
-        public bool IsPasswordExpired()
-        {
-            return (DateTime.Now - PasswordCreated.Value).TotalDays >= 30d;
-        } 
+        }      
 
         public User()
         {

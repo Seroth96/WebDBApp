@@ -1,5 +1,5 @@
-﻿using Login.Database;
-using Login.Interfaces;
+﻿using WebDBApp.Database;
+using WebDBApp.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -8,19 +8,20 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Login.DAL
+namespace WebDBApp.DAL
 {
     internal class UnitOfWork : IDisposable, IUnitOfWork
     {
-        public DbContext Context { get; set; }     
-        //public UserRepository UserRepository { get; set; }
+        public AppDbContext Context { get; set; }     
+        public UserRepository UserRepository { get; set; }
+        public RoleRepository RoleRepository { get; set; }
 
         public UnitOfWork()
         {
-            Context = new DbContext();
+            Context = new AppDbContext();
             
-            //UserRepository = new UserRepository(Context, DependencyResolver.Current.GetService<IHashHelper>());
-            
+            UserRepository = new UserRepository(Context, DependencyResolver.Current.GetService<IHashHelper>());
+            RoleRepository = new RoleRepository(Context);
         }
 
         public void SaveChanges()

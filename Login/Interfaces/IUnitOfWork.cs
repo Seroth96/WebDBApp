@@ -1,17 +1,18 @@
-﻿using Login.DAL;
-using Login.Database;
+﻿using WebDBApp.DAL;
+using WebDBApp.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Login.Interfaces
+namespace WebDBApp.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        DbContext Context { get; set; }
-        //UserRepository UserRepository { get; set; }
+        AppDbContext Context { get; set; }
+        UserRepository UserRepository { get; set; }
+        RoleRepository RoleRepository { get; set; }
         void SaveChanges();
     }
 }

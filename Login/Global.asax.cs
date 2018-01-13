@@ -1,4 +1,4 @@
-﻿using Login.Interfaces;
+﻿using WebDBApp.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +9,10 @@ using Microsoft.Practices.Unity.Mvc;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Login.Helpers;
-using Login.DAL;
+using WebDBApp.Helpers;
+using WebDBApp.DAL;
 
-namespace Login
+namespace WebDBApp
 {
     public class MvcApplication : System.Web.HttpApplication
     {

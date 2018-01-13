@@ -2,7 +2,7 @@ using System;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 
-namespace Login.App_Start
+namespace WebDBApp.App_Start
 {
     /// <summary>
     /// Specifies the Unity configuration for the main container.

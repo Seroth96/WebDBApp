@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 
-namespace Login.Extensions
+namespace WebDBApp.Extensions
 {
     public static class EnumExtension
     {       

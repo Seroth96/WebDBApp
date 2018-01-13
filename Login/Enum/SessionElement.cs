@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Login.Enum
+namespace WebDBApp.Enum
 {
     public enum SessionElement
     {

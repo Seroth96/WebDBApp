@@ -1,4 +1,4 @@
-﻿using Login.ViewModels;
+﻿using WebDBApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 
-namespace Login.Helpers
+namespace WebDBApp.Helpers
 {
     public class EmailAccount
     {
@@ -17,9 +17,9 @@ namespace Login.Helpers
 
     public static class EmailHelper
     {
-        private const string Email = "baim.powiadomienia@baim.pl";
-        private const string Password = "losowanez9slow";
-        private const string Smtp = "smtp.iq.pl";
+        private const string Email = "webdbapp@gmail.com";
+        private const string Password = "losowaniez9slow";
+        private const string Smtp = "smtp.gmail.com";
 
         public static void SendEmail(EmailAccount emailAccount)
         {
@@ -27,7 +27,7 @@ namespace Login.Helpers
             {
                 var basicCredential = new NetworkCredential(Email, Password);
                 var fromAddress = new MailAddress(Email);
-                //smtpClient.Host = Smtp;
+                smtpClient.Host = Smtp;
                 smtpClient.EnableSsl = true;
                 smtpClient.Port = 587;
                 smtpClient.UseDefaultCredentials = false;
@@ -52,7 +52,7 @@ namespace Login.Helpers
                                  "Hasło: <b>{3}</b> <br/>" +
                                  "Jeśli nie składałeś prośby o utworzenie konta proszę zignoruj tę wiadomość.<br/><br/>" +
                                  "Pozdrawiam, <br/>" +
-                                 "Administrator aplikacji \"Bank BAIM\" <br/><br/>" +
+                                 "Administrator aplikacji \"MTAB\" <br/><br/>" +
                                  "Odpowiedź wygenerowano automatycznie, proszę na nią nie odpowiadać.",
                 viewModel.FirstName, viewModel.LastName, viewModel.Login, viewModel.Password);
         }

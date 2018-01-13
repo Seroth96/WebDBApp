@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Login.Interfaces
+namespace WebDBApp.Interfaces
 {
     internal interface IRepository<TEntity, TId> where TEntity : class
     {

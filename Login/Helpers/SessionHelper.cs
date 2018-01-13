@@ -1,10 +1,10 @@
-﻿using Login.Enum;
+﻿using WebDBApp.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Login.Helpers
+namespace WebDBApp.Helpers
 {
     public static class SessionHelper
     {
