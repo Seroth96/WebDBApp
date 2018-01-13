@@ -42,6 +42,8 @@ namespace WebDBApp.Models
         [Required]
         virtual public Role Role { get; set; }
 
+        public virtual ICollection<CalendarEvent> CalendarEvents { get; set; }
+
         [NotMapped]
         [XmlElement("Name")]
         public string FullName
@@ -50,10 +52,11 @@ namespace WebDBApp.Models
             set
             {
             }
-        }      
+        }
 
         public User()
         {
+            this.CalendarEvents = new List<CalendarEvent>();
         }
     }
 }

@@ -2,6 +2,7 @@
 @using WebDBApp.Enum;
 @{
     var isAdmin = SessionHelper.GetElement<bool>(SessionElement.IsAdmin);
+    var role = SessionHelper.GetElement<bool>(SessionElement.Role);
 }
     <!DOCTYPE html>
     <html>
@@ -51,13 +52,22 @@
                         <span class="glyphicon glyphicon-search"></span>
                         Contact
                     </a>
-                </li>
+                </li>                
                 <li>
                     <a href="@Url.Action("Index", "Calendar" )">
                         <span class="glyphicon glyphicon-calendar"></span>
                         Scheduler
                     </a>
                 </li>
+                @if(role == "Trener")
+                {
+                    <li>
+                        <a href="@Url.Action("TrainerEvent", "Calendar" )">
+                            <span class="glyphicon glyphicon-bookmark"></span>
+                            Event Planner
+                        </a>
+                    </li>
+                }
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if(isAdmin == true)

@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebDBApp.ViewModels;
+using WebDBApp.Interfaces;
 
 namespace WebDBApp.Controllers
 {
@@ -13,6 +15,13 @@ namespace WebDBApp.Controllers
     public class CalendarController : Controller
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
+        private readonly IUnitOfWork _unitOfWork;
+
+        public CalendarController(IUnitOfWork unitOfWork, IHashHelper hashHelper)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -58,6 +67,14 @@ namespace WebDBApp.Controllers
             var vv = events.OrderBy(a => a.StartAt).ToList();
 
             return new JsonResult { Data = vv, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        [HttpGet]
+        public ActionResult TrainerEvent()
+        {
+            var viewModel = new ManageUsersViewModel(_unitOfWork);
+            viewModel.SetUsers(false);
+            return View(viewModel);
         }
     }
         

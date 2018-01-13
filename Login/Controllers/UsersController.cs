@@ -43,8 +43,7 @@ namespace Login.Controllers
         public ActionResult Edit(EditUserViewModel viewModel)
         {
             try
-            {
-                
+            {                
                 var user = _unitOfWork.UserRepository.Find(viewModel.Login);
                     if (user.Password != _hashHelper.Compute(viewModel.Password, user.Salt))
                     {
@@ -98,9 +97,15 @@ namespace Login.Controllers
             var user = _unitOfWork.UserRepository.Find(id);
             user.IsFrozen = true;
             _unitOfWork.SaveChanges();
-            //var viewModel = new ManageUsersViewModel(_unitOfWork);
-            //viewModel.SetUsers(true);
-            //return View();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Defreeze(string id)
+        {
+            var user = _unitOfWork.UserRepository.Find(id);
+            user.IsFrozen = false;
+            _unitOfWork.SaveChanges();
             return RedirectToAction("Index");
         }
     }

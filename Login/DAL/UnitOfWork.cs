@@ -15,6 +15,12 @@ namespace WebDBApp.DAL
         public AppDbContext Context { get; set; }     
         public UserRepository UserRepository { get; set; }
         public RoleRepository RoleRepository { get; set; }
+        public CalendarEventsRepository CalendarEventsRepository { get; set; }
+        public AccessoryRepository AccessoryRepository { get; set; }
+        public EventTypeRepository EventTypeRepository { get; set; }
+        public HallRepository HallRepository { get; set; }
+        public OrderRepository OrderRepository { get; set; }
+        public GymRepository GymRepository { get; set; }
 
         public UnitOfWork()
         {
@@ -22,6 +28,12 @@ namespace WebDBApp.DAL
             
             UserRepository = new UserRepository(Context, DependencyResolver.Current.GetService<IHashHelper>());
             RoleRepository = new RoleRepository(Context);
+            CalendarEventsRepository = new CalendarEventsRepository(Context);
+            AccessoryRepository = new AccessoryRepository(Context);
+            EventTypeRepository = new EventTypeRepository(Context);
+            HallRepository = new HallRepository(Context);
+            OrderRepository = new OrderRepository(Context);
+            GymRepository = new GymRepository(Context);
         }
 
         public void SaveChanges()

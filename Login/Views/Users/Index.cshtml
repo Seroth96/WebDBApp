@@ -36,10 +36,21 @@
                 </a>
                 </td>
             <td>
-                <a href="@Url.Action("Freeze", "Users", new { id=user.Login })">
-                    Log out
+                @if(user.IsFrozen)
+                {
+                <a href="@Url.Action("Defreeze", "Users" , new { id=user.Login })">
+                    Defreeze 
+                    <span class="glyphicon glyphicon-ok-circle"></span>
+                </a>
+                }
+                else
+                {
+                <a href="@Url.Action("Freeze", "Users" , new { id=user.Login })">
+                    Freeze 
                     <span class="glyphicon glyphicon-ban-circle"></span>
                 </a>
+                }
+                
             </td>
         </tr>
         }

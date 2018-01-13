@@ -162,6 +162,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="DAL\AccessoryRepository.cs" />
+    <Compile Include="DAL\CalendarEventsRepository.cs" />
+    <Compile Include="DAL\EventTypeRepository.cs" />
+    <Compile Include="DAL\HallRepository.cs" />
+    <Compile Include="DAL\GymRepository.cs" />
+    <Compile Include="DAL\OrderRepository.cs" />
     <Compile Include="DAL\Repository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="DAL\RoleRepository.cs" />
@@ -180,7 +186,14 @@
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Accessory.cs" />
     <Compile Include="Models\CalendarEvent.cs" />
+    <Compile Include="Models\EventType.cs" />
+    <Compile Include="Models\Gym.cs" />
+    <Compile Include="Models\GymDetails.cs" />
+    <Compile Include="Models\Hall.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderDetails.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="ViewModels\EditUserViewModel.cs" />
     <Compile Include="ViewModels\ManageUsersViewModel.cs" />
