@@ -69,7 +69,7 @@ namespace WebDBApp.Controllers
                 }
                 
                 FormsAuthentication.SetAuthCookie(user.Login, false);
-                SessionHelper.SetLogin(login);
+                SessionHelper.SetLogin(user.Login,user.Role.Name);
                 return new EmptyResult();
             }
         }

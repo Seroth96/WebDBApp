@@ -19,9 +19,10 @@ namespace WebDBApp.Helpers
             HttpContext.Current.Session[sessionElement.ToString()] = value;
         }
 
-        public static void SetLogin(string login)
+        public static void SetLogin(string login, string role)
         {
             HttpContext.Current.Session[SessionElement.Login.ToString()] = login;
+            HttpContext.Current.Session[SessionElement.Role.ToString()] = role;
             HttpContext.Current.Session[SessionElement.IsAdmin.ToString()] = true;
         }
 

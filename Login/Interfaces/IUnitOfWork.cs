@@ -12,7 +12,13 @@ namespace WebDBApp.Interfaces
     {
         AppDbContext Context { get; set; }
         UserRepository UserRepository { get; set; }
-        RoleRepository RoleRepository { get; set; }
+        RoleRepository RoleRepository { get; set; }        
+        CalendarEventsRepository CalendarEventsRepository { get; set; }
+        AccessoryRepository AccessoryRepository { get; set; }
+        EventTypeRepository EventTypeRepository { get; set; }
+        HallRepository HallRepository { get; set; }
+        OrderRepository OrderRepository { get; set; }
+        GymRepository GymRepository { get; set; }
         void SaveChanges();
     }
 }

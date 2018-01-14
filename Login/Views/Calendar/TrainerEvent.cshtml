@@ -1,0 +1,70 @@
+﻿@using WebDBApp.Helpers;
+@using WebDBApp.Enum;
+@model WebDBApp.ViewModels.CalendarEventsViewModel
+@{
+    ViewBag.Title = "Events";
+    var role = SessionHelper.GetElement<string>
+    (SessionElement.Role);
+    }
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Starts at
+            </th>
+            <th>
+                Ends at
+            </th>
+            <th>
+                Trainer
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Participants
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var ev in Model.CalendarEvents) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => ev.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => ev.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => ev.StartAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => ev.EndAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => ev.Trainer.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => ev.EventType.Name)
+            </td>
+            <td>
+                @foreach(var participant in ev.Users)
+                {
+                    <p>@(participant.FullName)</p>
+                }
+            </td>            
+            <td>
+                <a href="@Url.Action("EditEvent", "Calendar" , new { id=ev.CalendarEventID })">
+                    Edit
+                    <span class="glyphicon glyphicon-edit"></span>
+                </a>
+            </td>
+        </tr>
+        }
+
+    </table>

@@ -1,0 +1,85 @@
+﻿@model WebDBApp.ViewModels.NewCalendarEventViewModel
+@{
+    ViewBag.Title = "New Event";
+}
+
+<div class="row">
+    <div class="col-md-5" style="float: none; margin: 0 auto;">
+        <div id="errorPlaceHolder"></div>
+    </div>
+    <div class="col-md-5" style="float: none; margin: 0 auto;">
+        <h2>NEW EVENT</h2>
+        <form class="form-horizontal" action="/Calendar/NewEvent" method="post">
+            <div class="form-group">
+                <label for="Title" class="col-sm-3 control-label">TITLE</label>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control"})
+                </div>
+                <div class="col-sm-3">
+                    @Html.ValidationMessageFor(x => x.Title)
+                </div>
+            </div>            
+            <div class="form-group">
+                <label for="Description" class="col-sm-3 control-label">DESCRIPTION</label>
+                <div class="col-sm-6">
+                    @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
+                </div>
+                <div class="col-sm-3">
+                    @Html.ValidationMessageFor(x => x.Description)
+                </div>
+            </div>
+            <div class="form-group">                
+                <label for="StartAt" class="col-sm-3 control-label">STARTS AT</label>
+                <div class='col-sm-6 input-group date' id='datetimepicker6'>
+                    @Html.TextBoxFor(x => x.StartAt, new { @class = "form-control" })
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                <div class="col-sm-3">
+                    @Html.ValidationMessageFor(x => x.StartAt)
+                </div>               
+            </div>                
+            <div class="form-group">
+                <label for="EndAt" class="col-sm-3 control-label">ENDS AT</label>
+                <div class='col-sm-6 input-group date' id='datetimepicker7'>
+                    @Html.TextBoxFor(x => x.EndAt, new { @class = "form-control" })
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                <div class="col-sm-3">
+                    @Html.ValidationMessageFor(x => x.EndAt)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="SelectedType" class="col-sm-3 control-label">TYPE</label>
+                <div class="col-sm-6">
+                    @Html.DropDownListFor(model => model.SelectedType , new SelectList(Model.choices, "Value", "Text"), "Choose... ", new { @class="form-control dropdown" })
+                </div>
+            </div>           
+           
+
+
+            <div id="bottomMenu" class="col-md-offset-3 col-md-6">
+                <input type="submit" class="btn btn-success" value="WYŚLIJ" />
+                <input type="button" class="btn btn-warning" value="ANULUJ" onclick="window.location = '/Calendar';" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker6').datetimepicker();
+        $('#datetimepicker7').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>

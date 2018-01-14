@@ -10,9 +10,23 @@
         </div>
         <div class="col-lg-3">
             <div ng-show="SelectedEvent" class="alert alert-success" style="margin-top:50px">
-                <h2 style="margin-top:0px"> Selected Event:</h2>
-                <h3 style="color:#A9A50E">{{SelectedEvent.title}}</h3>
-                <p>{{SelectedEvent.description}}</p>
+                <h2 style="margin-top:0px; font-family: Arial; font-size: 30px; font-weight:bolder">{{SelectedEvent.title}}</h2>
+                <h3 style="color:#A9A50E"><strong>Trainer: </strong> {{SelectedEvent.trainer}}</h3>
+                <p><strong>Description: </strong> {{SelectedEvent.description}}</p>
+                <p><strong>Starts at: </strong> {{SelectedEvent.start}}</p>
+                <p><strong>Ends at: </strong> {{SelectedEvent.end}}</p>                
+                <p>
+                    <a ng-if="SelectedEvent.DidJoin == false" href="@Url.Action("JoinEvent", "Calendar" )?id={{SelectedEvent.id}}">
+                        Join
+                        <span class="glyphicon glyphicon-check"></span>
+                    </a>
+                </p>
+                <p>
+                    <a ng-if="SelectedEvent.DidJoin == true" href="@Url.Action("LeaveEvent", "Calendar" )?id={{SelectedEvent.id}}">
+                        Leave
+                        <span class="glyphicon glyphicon-share"></span>
+                    </a>
+                </p>
             </div>
         </div>
     </div>
@@ -20,3 +34,14 @@
 
 @* OUR ANGULAR COMPONENTs *@
 <script src="~/Scripts/calendar/MyApp.js"></script>
+
+<style>
+    strong{
+        font-size: 20px;
+    }
+    a{
+        font-size:15px;
+        color:#A9A50E;
+        font-weight:bolder;
+    }
+</style>

@@ -1,0 +1,88 @@
+﻿@using WebDBApp.Helpers;
+@using WebDBApp.Enum;
+@model WebDBApp.ViewModels.OrderViewModel
+@{
+    ViewBag.Title = "Orders";
+    var role = SessionHelper.GetElement<string>(SessionElement.Role);
+}    
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Order Title
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Amount  
+            </th>
+            <th>
+                Trainer
+            </th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+
+        @foreach (var order in Model.Orders) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => order.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => order.OrderDetails.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => order.OrderDetails.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => order.User.FullName)
+            </td>
+            @if(role == "Pracownik")
+            {   
+            <td>         
+                <a href="@Url.Action("AcceptOrder", "Order" , new { id=order.ID })">
+                    Accept
+                    <span class="glyphicon glyphicon-ok-circle"></span>
+                </a>
+            </td>
+            <td>
+                <a href="@Url.Action("RejectOrder", "Order" , new { id=order.ID })">
+                    Reject
+                    <span class="glyphicon glyphicon-ban-circle"></span>
+                </a>
+            </td>
+            }
+            else if(role == "Trener")
+            {
+            <td>
+               @if(order.OrderDetails.IsRejected)
+                {
+                    @("Order is rejected")
+                } 
+                else if(order.OrderDetails.IsCompleted)
+                {
+                    @("Order is accepted")
+                }
+                else
+                {
+                    @("Order is pending")
+                } 
+            </td>
+           
+            <td>
+                @if(!order.OrderDetails.IsCompleted)
+                {
+                <a href="@Url.Action("EditOrder", "Order", new { id=order.ID })">
+                        Edit
+                        <span class="glyphicon glyphicon-edit"></span>
+                </a>
+                }
+            </td>   
+            
+            }
+                
+           
+        </tr>
+        }
+
+    </table>

@@ -12,12 +12,11 @@ namespace WebDBApp.Models
         [Required, ForeignKey("Order")]
         public int ID { get; set; }
         [Required]
-        public string Name { get; set; }
-        [Required]
         public string Description { get; set; }
         [Required]
         public int Amount { get; set; }
         public bool IsCompleted { get; set; } = false;
+        public bool IsRejected { get; set; } = false;
 
         [Required]
         public virtual Order Order { get; set; }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace WebDBApp.Service_References.Annotation
 {
@@ -31,6 +32,22 @@ namespace WebDBApp.Service_References.Annotation
                 else
                     filterContext.Result = new RedirectResult("~/Login/Index");
             }
+        }
+    }
+
+    public class CheckSession : ActionFilterAttribute, IActionFilter
+    {
+        public string[] Role { get; set; }
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            //if Session == null => Login page
+            if (!Role.Any(role => role.Equals(SessionHelper.GetElement<string>(Enum.SessionElement.Role))))
+            {
+                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { action = "Index", controller = "Home" }));
+
+            }
+
+            base.OnActionExecuting(filterContext);
         }
     }
 }

@@ -1,0 +1,48 @@
+﻿@model WebDBApp.ViewModels.NewOrderViewModel
+@{
+    ViewBag.Title = "New Order";
+}
+
+<div class="row">
+    <div class="col-md-5" style="float: none; margin: 0 auto;">
+        <div id="errorPlaceHolder"></div>
+    </div>
+    <div class="col-md-5" style="float: none; margin: 0 auto;">
+        <h2>NEW ORDER</h2>
+        <form class="form-horizontal" action="/Order/NewOrder" method="post">
+            <div class="form-group">
+                <label for="Title" class="col-sm-3 control-label">TITLE</label>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control"})
+                </div>
+                <div class="col-sm-3">
+                    @Html.ValidationMessageFor(x => x.Title)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="FirstName" class="col-sm-3 control-label">Amount</label>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(x => x.Amount, new { @class = "form-control" })
+                </div>
+                <div class="col-sm-3">
+                    @Html.ValidationMessageFor(x => x.Amount)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Description" class="col-sm-3 control-label">DESCRIPTION</label>
+                <div class="col-sm-6">
+                    @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
+                </div>
+                <div class="col-sm-3">
+                    @Html.ValidationMessageFor(x => x.Description)
+                </div>
+            </div>
+
+            <div id="bottomMenu" class="col-md-offset-3 col-md-6">
+                <input type="submit" class="btn btn-success" value="WYŚLIJ" />
+                <input type="button" class="btn btn-warning" value="ANULUJ" onclick="window.location = '/Order/OrdersForUser';" />
+            </div>
+        </form>
+    </div>
+</div>
+

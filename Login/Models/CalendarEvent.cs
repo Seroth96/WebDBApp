@@ -16,11 +16,11 @@ namespace WebDBApp.Models
         [Required]
         public string Description { get; set; }
         [Required]
-        public string StartAt { get; set; }
+        public DateTime StartAt { get; set; }
         [Required]
-        public string EndAt { get; set; }
+        public DateTime EndAt { get; set; }
         [Required]
-        public bool IsFullDay { get; set; }
+        public bool IsFullDay { get; set; } = false;
         [Required]
         public User Trainer { get; set; }
 
