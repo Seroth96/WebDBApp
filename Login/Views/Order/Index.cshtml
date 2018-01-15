@@ -5,6 +5,11 @@
     ViewBag.Title = "Orders";
     var role = SessionHelper.GetElement<string>(SessionElement.Role);
 }    
+    <div class="row">
+    <div class="col-md-6" style="float: none; margin: 0 auto;">
+        <div id="errorPlaceHolder"></div>
+    </div>
+</div>
     <table class="table table-bordered">
         <tr>
             <th>

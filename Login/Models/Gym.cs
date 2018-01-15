@@ -15,5 +15,10 @@ namespace WebDBApp.Models
         public virtual GymDetails GymDetails { get; set; }
 
         public virtual ICollection<Hall> Halls { get; set; }
+
+        public Gym()
+        {
+            Halls = new List<Hall>();
+        }
     }
 }

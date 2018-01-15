@@ -17,7 +17,13 @@ namespace WebDBApp.Models
         public double SurfaceArea { get; set; }
 
         public virtual ICollection<Accessory> Accessories { get; set; }
-        public virtual ICollection<CalendarEvent> CalendarEvents { get; set; }
+
+        public virtual Gym Gym { get; set; }
+
+        public Hall()
+        {
+            this.Accessories = new List<Accessory>();
+        }
 
     }
 }

@@ -1,6 +1,6 @@
 ﻿@model WebDBApp.ViewModels.NewCalendarEventViewModel
 @{
-    ViewBag.Title = "New Event";
+    ViewBag.Title = "Edit Event";
 }
 
 <div class="row">
@@ -8,7 +8,7 @@
         <div id="errorPlaceHolder"></div>
     </div>
     <div class="col-md-5" style="float: none; margin: 0 auto;">
-        <h2>NEW EVENT</h2>
+        <h2>EDIT EVENT</h2>
         <form class="form-horizontal" action="/Calendar/EditEvent" method="post">
             @Html.HiddenFor(model => model.ID)
             <div class="form-group">

@@ -161,6 +161,8 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\AccessoryController.cs" />
+    <Compile Include="Controllers\HallController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
@@ -231,8 +233,12 @@
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetails.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="ViewModels\EditAccessoriesViewModel.cs" />
     <Compile Include="ViewModels\EditUserViewModel.cs" />
     <Compile Include="ViewModels\CalendarEventsViewModel.cs" />
+    <Compile Include="ViewModels\NewAccessoryViewModel.cs" />
+    <Compile Include="ViewModels\NewHallViewModel.cs" />
+    <Compile Include="ViewModels\HallViewModel.cs" />
     <Compile Include="ViewModels\NewOrderViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\NewCalendarEventViewModel.cs" />
@@ -1370,10 +1376,14 @@
     <Content Include="Views\Calendar\NewEvent.cshtml" />
     <Content Include="Views\Calendar\TrainerEvent.cshtml" />
     <Content Include="Views\Calendar\EditEvent.cshtml" />
+    <Content Include="Views\Hall\EditHall.cshtml" />
+    <Content Include="Views\Hall\NewHall.cshtml" />
+    <Content Include="Views\Hall\Index.cshtml" />
+    <Content Include="Views\Accessory\EditAccessory.cshtml" />
+    <Content Include="Views\Accessory\NewAccessory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Account\" />
     <Folder Include="Views\Validation\" />
   </ItemGroup>
   <ItemGroup>

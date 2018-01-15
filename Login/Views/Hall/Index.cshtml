@@ -1,0 +1,80 @@
+﻿@using WebDBApp.Helpers;
+@using WebDBApp.Enum;
+@model WebDBApp.ViewModels.HallViewModel
+@{
+    ViewBag.Title = "Halls";
+    var role = SessionHelper.GetElement<string>(SessionElement.Role);
+    }
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Gym
+            </th>
+            <th>
+                Hall Name
+            </th>            
+            <th>
+                Surface Area
+            </th>            
+            <th>
+                Accessories
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var gym in Model.Gyms) {
+        <tr>
+            @foreach(var ev in gym.Halls)
+            {
+            
+            <td>
+                @Html.DisplayFor(modelItem => gym.GymDetails.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => ev.Name)
+            </td>  
+            <td>
+                @Html.DisplayFor(modelItem => ev.SurfaceArea)
+            </td>            
+            <td>
+                @foreach(var accessory in ev.Accessories)
+                {
+                    <p><strong>Nazwa:</strong> @(accessory.Name)   <strong>Opis:</strong> @(accessory.Description)</p>
+                }
+            </td>   
+            <td>
+                @if(ev.Accessories.Count() > 0)
+                {
+                <a href="@Url.Action("EditAccessory", "Accessory" , new { id=ev.ID })">
+                    Edit Accessories
+                    <span class="glyphicon glyphicon-edit"></span>
+                </a>
+                @("OR")
+                }
+                
+                <a href="@Url.Action("NewAccessory", "Accessory" , new { id=ev.ID })">
+                    Add Accessories
+                    <span class="glyphicon glyphicon-new-window"></span>
+                </a>
+            </td>         
+            <td>
+                <a href="@Url.Action("EditHall", "Hall" , new { id=ev.ID })">
+                    Edit
+                    <span class="glyphicon glyphicon-edit"></span>
+                </a>
+            </td>
+            }
+        </tr>
+        }
+
+    </table>
+    @if(role == "Administrator")
+    {
+    <div class="row center-block">
+        <div class="col-lg-2">
+            <input type="button" class="btn btn-success" onclick="window.location = '/Hall/NewHall';" value="Add Hall"/>
+        </div>
+       
+    </div>
+    }

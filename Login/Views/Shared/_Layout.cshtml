@@ -33,7 +33,7 @@
         <script src="~/Scripts/angular-ui/ui-bootstrap.min.js"></script>
         <script src="~/Scripts/moment.min.js"></script>
         <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
-        <script type="text/javascript" src="@Url.Content("/Scripts/Login/main.js")"></script>
+        <script src="~/Scripts/Login/main.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
         <title>@ViewBag.Title</title>
     </head>
@@ -91,7 +91,7 @@
                     </ul>  
                 </li> 
                 }
-                else if(role == "Pracownik") 
+                else if(role == "Pracownik" || role =="Administrator") 
                 {
                 <li>
                     <button type="button" class="btn navbar-btn dropdown-toggle" data-toggle="dropdown"style="color: #000">Worker
@@ -103,6 +103,12 @@
                             <a href="@Url.Action("Index", "Order" )">
                                 <span class="glyphicon glyphicon-bookmark"></span>
                                 Orders
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Hall" )">
+                                <span class="glyphicon glyphicon-bookmark"></span>
+                                Halls
                             </a>
                         </li>
                     </ul>  
@@ -130,6 +136,11 @@
             </ul>
         </div>
         <div id="viewContent">
+            <div class="row">
+                <div class="col-md-6" style="float: none; margin: 0 auto;">
+                    <div id="errorPlaceHolder"></div>
+                </div>
+            </div>
             @RenderBody()
         </div>
     </body>
