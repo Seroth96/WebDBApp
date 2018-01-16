@@ -1,0 +1,1 @@
+2018-01-15 14:21:08.9333|ERROR|WebDBApp.Controllers.AccessoryController|Odwo³anie do obiektu nie zosta³o ustawione na wyst¹pienie obiektu.
