@@ -1,0 +1,50 @@
+﻿@model WebDBApp.ViewModels.TestDataViewModel
+
+<div class="row">
+    <div class="panel panel-default col-md-6" style="float: left; ">
+        <h2>Test progresywny Balke'a</h2>
+
+        <p style="margin:5px 5px 5px 20px">
+            Test wykonywany jest na bieżni ruchomej pozwalającej zmieniać kąt nachylenia, charakteryzuje się różnym przebiegiem dla mężczyzn i kobiet. Prędkość przesuwu taśmy jest stała i wynosi 5,3km na godzinę dla mężczyzn. Kąt nachyelnia na starcie wynosi 0%. Po 1min trwania wysiłku kąt nachylenia zwiększa się o 2%, następnie co 2 min kąt nachylenia zwiększa się o 1%. Prędkość przesuwu taśmy dla kobieta w czasie trwania całego testu jest stała i wynosi 4,8km na godzinę. Co 3 minuty zwiększa się kąt nachylenia bieżni o 2,5%. Wysiłek kontynuowany jest do odmowy. Mierzony czas trwania wysiłku powinien zawierać się w przedziale 9-15 min.
+        </p>
+        <p style="margin:5px 5px 5px 20px">
+            Ocena tej próby różni się w zależności od wieku i płci. Określa maksymalną wartość poboru tlenu. Rezultat należy podawać w sekundach!
+        </p>
+    </div>
+    <div class="panel panel-default col-md-6" style="float: right; padding: 5px 5px 5px 10px ;">
+        <h2>Wprowadź wyniki</h2>
+        <form class="form-horizontal">
+            @Html.HiddenFor(model => model.ID)
+            <div class="form-group">
+                <label for="Result" class="col-sm-3 control-label">CZAS</label>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(x => x.Result, new { @class = "form-control"})
+                </div>
+                <div class="col-sm-3">
+                    @Html.ValidationMessageFor(x => x.Result)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Age" class="col-sm-3 control-label">WIEK</label>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(x => x.Age, new { @class = "form-control"})
+                </div>
+                <div class="col-sm-3">
+                    @Html.ValidationMessageFor(x => x.Age)
+                </div>
+            </div>
+            <div id="bottomMenu" class="col-md-offset-3 col-md-6">
+                <input type="button" class="btn btn-success" value="WYŚLIJ" onclick="getResult()" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div id="resultDiv" class="row" hidden>
+    <div class="col-md-5" style="float: none; margin: 0 auto;">
+        <p style="font-size:30px; font-family:Arial; font-weight:bold; text-align:center;">
+            Twój wynik to:  <span style="font-size:27px; font-family:Arial; font-weight:400; text-align:left;" id="resultOfTest"></span>
+        </p>
+    </div>
+</div>

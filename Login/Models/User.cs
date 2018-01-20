@@ -37,10 +37,15 @@ namespace WebDBApp.Models
         public string Email { get; set; }
         [XmlIgnore]
         [Required]
+        public bool Sex { get; set; } // true == man and false == women
+        [XmlIgnore]
+        [Required]
         public bool IsFrozen { get; set; } = false;
 
         [Required]
         virtual public Role Role { get; set; }
+
+        virtual public ICollection<Test> Tests { get; set; }
 
         public virtual ICollection<CalendarEvent> CalendarEvents { get; set; }
 
@@ -57,6 +62,7 @@ namespace WebDBApp.Models
         public User()
         {
             this.CalendarEvents = new List<CalendarEvent>();
+            this.Tests = new List<Test>();
         }
     }
 }

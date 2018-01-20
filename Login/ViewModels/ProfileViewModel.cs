@@ -12,25 +12,25 @@ using NLog;
 
 namespace WebDBApp.ViewModels
 {
-    public class ManageUsersViewModel 
+    public class ProfileViewModel 
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
         private readonly IUnitOfWork _unitOfWork;
 
 
-        public IEnumerable<User> Users { get; set; }
+        public IEnumerable<Test> Tests { get; set; }
         
 
-        public ManageUsersViewModel(IUnitOfWork unitOfWork)
+        public ProfileViewModel(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+            Tests = new List<Test>();
+        }      
 
-        }
-
-        public void SetUsers(bool isFrozen)
+        public void SetTestsforUser(User user)
         {
-            Users = _unitOfWork.UserRepository.All().Where(user => user.IsFrozen == isFrozen).ToList();
+            Tests = _unitOfWork.TestRepository.All().Where(test => test.User.Login == user.Login).ToList();
         }
-        
+
     }
 }

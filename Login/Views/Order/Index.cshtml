@@ -42,7 +42,7 @@
             <td>
                 @Html.DisplayFor(modelItem => order.User.FullName)
             </td>
-            @if(role == "Pracownik")
+            @if(role == "Pracownik" || role =="Administrator")
             {   
             <td>         
                 <a href="@Url.Action("AcceptOrder", "Order" , new { id=order.ID })">

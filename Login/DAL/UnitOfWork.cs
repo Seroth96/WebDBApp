@@ -21,6 +21,7 @@ namespace WebDBApp.DAL
         public HallRepository HallRepository { get; set; }
         public OrderRepository OrderRepository { get; set; }
         public GymRepository GymRepository { get; set; }
+        public TestRepository TestRepository { get; set; }
 
         public UnitOfWork()
         {
@@ -34,6 +35,7 @@ namespace WebDBApp.DAL
             HallRepository = new HallRepository(Context);
             OrderRepository = new OrderRepository(Context);
             GymRepository = new GymRepository(Context);
+            TestRepository = new TestRepository(Context);
         }
 
         public void SaveChanges()

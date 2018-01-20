@@ -56,6 +56,12 @@
                         Scheduler
                     </a>
                 </li>
+                <li>
+                    <a href="@Url.Action("Index", "Tests" )">
+                        <span class="glyphicon glyphicon-scale"></span>
+                        Test Yourself!
+                    </a>
+                </li>
                 @if(role == "Trener")
                 {
                 <li>
@@ -117,6 +123,12 @@
                 
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="@Url.Action("Index", "Profile" )">
+                        Your tests
+                        <span class="glyphicon glyphicon-tent"></span>
+                    </a>
+                </li>
                 @if(role == "Administrator")
                 {
                      <li>
