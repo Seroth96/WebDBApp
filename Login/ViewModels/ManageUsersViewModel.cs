@@ -27,9 +27,9 @@ namespace WebDBApp.ViewModels
 
         }
 
-        public void SetUsers(bool isFrozen)
+        public void SetUsers()
         {
-            Users = _unitOfWork.UserRepository.All().Where(user => user.IsFrozen == isFrozen).ToList();
+            Users = _unitOfWork.UserRepository.All().ToList();
         }
         
     }

@@ -10,17 +10,17 @@ namespace WebDBApp.ViewModels
 {
     public class GymViewModel
     {
-        [CustomRequired]
+        [Required]
         public int ID { get; set; }
-        [CustomRequired]
+        [Required]
         public string Name { get; set; }
-        [CustomRequired]
+        [Required]
         public string Description { get; set; }
-        [CustomRequired]
+        [Required]
         public string Address { get; set; }
-        [CustomRequired]
+        [Required]
         public string ContactPhone { get; set; }
-        [CustomRequired]
+        [Required]
         [EmailAddress(ErrorMessage = "Niepoprawny format")]
         public string Email { get; set; }
     }

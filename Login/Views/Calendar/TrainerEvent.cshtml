@@ -29,9 +29,7 @@
             <th>
                 Participants
             </th>
-            @if(role == "Trener"){
             <th></th>
-            }
         </tr>
 
         @foreach (var ev in Model.CalendarEvents) {
@@ -59,15 +57,13 @@
                 {
                     <p>@(participant.FullName)</p>
                 }
-            </td> 
-            @if(role == "Trener"){                   
+            </td>            
             <td>
                 <a href="@Url.Action("EditEvent", "Calendar" , new { id=ev.CalendarEventID })">
                     Edit
                     <span class="glyphicon glyphicon-edit"></span>
                 </a>
             </td>
-            }
         </tr>
         }
 

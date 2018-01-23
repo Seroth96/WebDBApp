@@ -122,6 +122,10 @@ input[disabled = 'true'], input[disabled = 'disabled'] {
     opacity: .5;
 }
 
+textarea{
+    min-height: 100px;
+}
+
 .btn[disabled='False'] {
     opacity: 1 !important;
 }

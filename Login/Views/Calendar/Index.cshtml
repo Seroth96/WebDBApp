@@ -13,8 +13,8 @@
                 <h2 style="margin-top:0px; font-family: Arial; font-size: 30px; font-weight:bolder">{{SelectedEvent.title}}</h2>
                 <h3 style="color:#A9A50E"><strong>Trainer: </strong> {{SelectedEvent.trainer}}</h3>
                 <p><strong>Description: </strong> {{SelectedEvent.description}}</p>
-                <p><strong>Starts at: </strong> {{SelectedEvent.start}}</p>
-                <p><strong>Ends at: </strong> {{SelectedEvent.end}}</p>                
+                <p><strong>Starts at: </strong> {{SelectedEvent.start | date:'MM/dd/yyyy'}}</p>
+                <p><strong>Ends at: </strong> {{SelectedEvent.end | date:'MM/dd/yyyy'}}</p>                
                 <p>
                     <a ng-if="SelectedEvent.DidJoin == false" href="@Url.Action("JoinEvent", "Calendar" )?id={{SelectedEvent.id}}">
                         Join
