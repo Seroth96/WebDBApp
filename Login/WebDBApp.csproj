@@ -215,22 +215,6 @@
     <Compile Include="Interfaces\IHashHelper.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
-    <Compile Include="Migrations\201801141509596_OrderFix.cs" />
-    <Compile Include="Migrations\201801141509596_OrderFix.Designer.cs">
-      <DependentUpon>201801141509596_OrderFix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801141645108_eventsMig.cs" />
-    <Compile Include="Migrations\201801141645108_eventsMig.Designer.cs">
-      <DependentUpon>201801141645108_eventsMig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801141647102_eventsMig1.cs" />
-    <Compile Include="Migrations\201801141647102_eventsMig1.Designer.cs">
-      <DependentUpon>201801141647102_eventsMig1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801201147526_sex.cs" />
-    <Compile Include="Migrations\201801201147526_sex.Designer.cs">
-      <DependentUpon>201801201147526_sex.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Test.cs" />
     <Compile Include="Models\Accessory.cs" />
@@ -1419,20 +1403,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801141509596_OrderFix.resx">
-      <DependentUpon>201801141509596_OrderFix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801141645108_eventsMig.resx">
-      <DependentUpon>201801141645108_eventsMig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801141647102_eventsMig1.resx">
-      <DependentUpon>201801141647102_eventsMig1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801201147526_sex.resx">
-      <DependentUpon>201801201147526_sex.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
