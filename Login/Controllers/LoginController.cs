@@ -70,7 +70,7 @@ namespace WebDBApp.Controllers
                 
                 FormsAuthentication.SetAuthCookie(user.Login, false);
                 SessionHelper.SetLogin(user.Login,user.Role.Name);
-                return RedirectToAction("Index", "Home");
+                return new EmptyResult();
             }
         }
 
