@@ -10,12 +10,12 @@ namespace WebDBApp.ViewModels
 {
     public class NewOrderViewModel
     {
-        [CustomRequired]
+        [Required]
         public int ID { get; set; }
-        [CustomRequired]
+        [Required]
         public string Title { get; set; }
         public string Description { get; set; }
-        [CustomRequired]
+        [Required]
         public int Amount { get; set; }
         public bool IsCompleted { get; set; } = false;
         public bool IsRejected { get; set; } = false;

@@ -20,13 +20,13 @@ namespace WebDBApp.ViewModels
         public IEnumerable<Accessory> Accessories { get; set; }
         public List<SelectListItem> choices { get; set; }
 
-        [CustomRequired]
+        [Required]
         public int ID { get; set; }
-        [CustomRequired]
+        [Required]
         public int SelectedAccesory { get; set; }
-        [CustomRequired]
+        [Required]
         public string NewName { get; set; }
-        [CustomRequired]
+        [Required]
         public string Description { get; set; }
 
         public EditAccessoriesViewModel()

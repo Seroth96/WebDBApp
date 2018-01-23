@@ -11,11 +11,11 @@ namespace WebDBApp.ViewModels
 {
     public class NewAccessoryViewModel
     {
-        [CustomRequired]
+        [Required]
         public string Name { get; set; }
-        [CustomRequired]
+        [Required]
         public string Description { get; set; }
-
+        [Required]
         public Hall Hall { get; set; }
 
 

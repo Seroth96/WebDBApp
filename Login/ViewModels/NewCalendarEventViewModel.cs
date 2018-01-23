@@ -20,15 +20,15 @@ namespace WebDBApp.ViewModels
         public List<SelectListItem> choices { get; set; }
         public int SelectedType { get; set; }
 
-        [CustomRequired]
+        [Required]
         public int ID { get; set; }
-        [CustomRequired]
+        [Required]
         public string Title { get; set; }
-        [CustomRequired]
+        [Required]
         public string Description { get; set; }
-        [CustomRequired]
+        [Required]
         public DateTime StartAt { get; set; }
-        [CustomRequired]
+        [Required]
         public DateTime EndAt { get; set; }    
           
         public User Trainer { get; set; }

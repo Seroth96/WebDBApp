@@ -11,11 +11,11 @@ namespace WebDBApp.ViewModels
 {
     public class NewHallViewModel
     {
-        [CustomRequired]
+        [Required]
         public int ID { get; set; }
-        [CustomRequired]
+        [Required]
         public string Name { get; set; }
-        [CustomRequired]
+        [Required]
         public double SurfaceArea { get; set; }
 
         public IEnumerable<Gym> Gyms { get; set; }

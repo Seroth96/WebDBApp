@@ -5,12 +5,16 @@ namespace WebDBApp.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
     using System.Text;
+    using WebDBApp.Interfaces;
+    using WebDBApp.Models;
+
     internal sealed class Configuration : DbMigrationsConfiguration<WebDBApp.Database.AppDbContext>
     {
         public Configuration()
         {
+            
             //AutomaticMigrationsEnabled = false;
-           // ContextKey = "Login.Database.LoginDbContext";
+            //ContextKey = "Login.Database.DBContext";
         }
 
         protected override void Seed(WebDBApp.Database.AppDbContext context)
@@ -27,6 +31,8 @@ namespace WebDBApp.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            
             
             if (!context.Roles.Any(role => role.Name.Equals("Klient")))
             {
@@ -59,6 +65,8 @@ namespace WebDBApp.Migrations
             {
                 context.EventTypes.Add(new Models.EventType { Name = "Easy" });
             }
+
+            
         }
     }
 }

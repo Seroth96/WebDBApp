@@ -28,7 +28,7 @@ namespace Login.Controllers
         public ActionResult Index()
         {
             var viewModel = new ManageUsersViewModel(_unitOfWork);
-            viewModel.SetUsers(false);
+            viewModel.SetUsers();
             return View(viewModel);
         }
 
@@ -36,7 +36,7 @@ namespace Login.Controllers
         public ActionResult GetFrozenUsers()
         {
             var viewModel = new ManageUsersViewModel(_unitOfWork);
-            viewModel.SetUsers(true);
+            viewModel.SetUsers();
             return View();
         }
         [HttpPost]
@@ -91,7 +91,7 @@ namespace Login.Controllers
             viewModel.choices.AddRange(x);
             return View(viewModel);
         }
-        [HttpPost]
+        [HttpGet]
         public ActionResult Freeze(string id)
         {
             var user = _unitOfWork.UserRepository.Find(id);
@@ -100,7 +100,7 @@ namespace Login.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult Defreeze(string id)
         {
             var user = _unitOfWork.UserRepository.Find(id);
