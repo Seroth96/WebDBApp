@@ -1,0 +1,32 @@
+﻿@using WebDBApp.Helpers;
+@using WebDBApp.Enum;
+@model WebDBApp.ViewModels.TestsViewModel
+
+@{
+    ViewBag.Title = "Tests";
+    var role = SessionHelper.GetElement<string>(SessionElement.Role);
+}    
+<script src="~/Scripts/Tests/tests.js"></script>
+<div class="row">
+    <div class="col-md-5" style="float: none; margin: 0 auto;">
+        <div id="errorPlaceHolder"></div>
+    </div>
+    <div class="col-md-5" style="float: none; margin: 0 auto;">
+        <h2>WYBIERZ TEST</h2>        
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="SelectedTest" class="col-sm-3 control-label">NAZWA TESTU</label>
+                <div class="col-sm-6">
+                    @Html.DropDownListFor(model => model.SelectedTest , new SelectList(Model.choices, "Value", "Text"), new { @class="form-control dropdown" })
+                </div>
+                <div class="col-sm-3">
+                    <input type="button" class="btn btn-success" value="WYBIERZ" onclick="showTest()" />
+                </div>
+            </div>            
+        </form>
+    </div>
+</div>
+
+
+<div class="row" id="TestContent">
+</div>

@@ -70,6 +70,7 @@ namespace WebDBApp.DAL
                 Email = viewModel.Email,
                 FirstName = viewModel.FirstName,
                 LastName = viewModel.LastName,
+                Sex = viewModel.Sex,
                 Role = role
             });
             try

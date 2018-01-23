@@ -1,0 +1,50 @@
+﻿@model WebDBApp.ViewModels.TestDataViewModel
+
+<div class="row">
+    <div class="panel panel-default col-md-6" style="float: left; ">
+        <h2>Test Coopera dla nietrenujących</h2>
+
+        <p style="margin:5px 5px 5px 20px">
+            CZęsto nazywany testem 12 minut. Test ten jest jednym z elementów zestawu ćwiczeń opracowanych przez Kennetha Coopera(1968) w celu oceny wydolności fizycznej, obejmujących chód i bieg. Polega na pokonaniu (biegnąc) w czasie 12 minut jak najdłuższego dystansu. Znając przebyty dystans oceniamy poziom wydolności fizycznej. Warunki, ktore powinny być spełnione do wykonania testu, to: dobra, równa nawierzchnia, wyraźnie oznakowany dystans - znaczniki co 10m, wyraźny sygnał startu i końca biegu.
+        </p>
+        <p style="margin:5px 5px 5px 20px">
+            Ocena tej próby różni się w zależności od wieku i płci. Dystans należy podawać w metrach!
+        </p>
+    </div>
+    <div class="panel panel-default col-md-6" style="float: right; padding: 5px 5px 5px 10px ;">
+        <h2>Wprowadź wyniki</h2>
+        <form class="form-horizontal">
+            @Html.HiddenFor(model => model.ID)
+            <div class="form-group">
+                <label for="Result" class="col-sm-3 control-label">DYSTANS</label>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(x => x.Result, new { @class = "form-control"})
+                </div>
+                <div class="col-sm-3">
+                    @Html.ValidationMessageFor(x => x.Result)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Age" class="col-sm-3 control-label">WIEK</label>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(x => x.Age, new { @class = "form-control"})
+                </div>
+                <div class="col-sm-3">
+                    @Html.ValidationMessageFor(x => x.Age)
+                </div>
+            </div>
+            <div id="bottomMenu" class="col-md-offset-3 col-md-6">
+                <input type="button" class="btn btn-success" value="WYŚLIJ" onclick="getResult()" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div id="resultDiv" class="row" hidden>
+    <div class="col-md-5" style="float: none; margin: 0 auto;">
+        <p style="font-size:30px; font-family:Arial; font-weight:bold; text-align:center;">
+            Twój wynik to:  <span style="font-size:27px; font-family:Arial; font-weight:400; text-align:left;" id="resultOfTest"></span>
+        </p>
+    </div>
+</div>

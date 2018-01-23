@@ -45,6 +45,15 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="Sex" class="col-sm-3 control-label">PŁEĆ</label>
+                <div class="col-sm-6">
+                    @Html.EditorFor(x => x.Sex, new { @class = "form-control" })
+                </div>
+                <div class="col-sm-3">
+                    @Html.ValidationMessageFor(x => x.Sex)
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="Password" class="col-sm-3 control-label">HASŁO</label>
                 <div class="col-sm-6">
                     @Html.PasswordFor(x => x.Password, new { @class = "form-control" })

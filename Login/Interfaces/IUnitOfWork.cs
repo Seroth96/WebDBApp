@@ -19,6 +19,7 @@ namespace WebDBApp.Interfaces
         HallRepository HallRepository { get; set; }
         OrderRepository OrderRepository { get; set; }
         GymRepository GymRepository { get; set; }
+        TestRepository TestRepository { get; set; }
         void SaveChanges();
     }
 }

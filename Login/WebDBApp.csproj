@@ -172,13 +172,16 @@
     <Compile Include="Controllers\HallController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\TestsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="DAL\AccessoryRepository.cs" />
     <Compile Include="DAL\CalendarEventsRepository.cs" />
     <Compile Include="DAL\EventTypeRepository.cs" />
     <Compile Include="DAL\HallRepository.cs" />
     <Compile Include="DAL\GymRepository.cs" />
+    <Compile Include="DAL\TestRepository.cs" />
     <Compile Include="DAL\OrderRepository.cs" />
     <Compile Include="DAL\Repository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
@@ -212,6 +215,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\TestsHelper.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\HashHelper.cs" />
     <Compile Include="Helpers\SessionHelper.cs" />
@@ -222,7 +226,20 @@
     <Compile Include="Migrations\201801161930271_initial.Designer.cs">
       <DependentUpon>201801161930271_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801141645108_eventsMig.cs" />
+    <Compile Include="Migrations\201801141645108_eventsMig.Designer.cs">
+      <DependentUpon>201801141645108_eventsMig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801141647102_eventsMig1.cs" />
+    <Compile Include="Migrations\201801141647102_eventsMig1.Designer.cs">
+      <DependentUpon>201801141647102_eventsMig1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801201147526_sex.cs" />
+    <Compile Include="Migrations\201801201147526_sex.Designer.cs">
+      <DependentUpon>201801201147526_sex.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Test.cs" />
     <Compile Include="Models\Accessory.cs" />
     <Compile Include="Models\CalendarEvent.cs" />
     <Compile Include="Models\EventType.cs" />
@@ -232,6 +249,8 @@
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetails.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="ViewModels\ProfileViewModel.cs" />
+    <Compile Include="ViewModels\TestDataViewModel.cs" />
     <Compile Include="ViewModels\EditAccessoriesViewModel.cs" />
     <Compile Include="ViewModels\EditUserViewModel.cs" />
     <Compile Include="ViewModels\CalendarEventsViewModel.cs" />
@@ -244,6 +263,7 @@
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\ManageUsersViewModel.cs" />
     <Compile Include="ViewModels\GymViewModel.cs" />
+    <Compile Include="ViewModels\TestsViewModel.cs" />
     <Compile Include="ViewModels\ResetPasswordRequestViewModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -262,6 +282,9 @@
     <Content Include="Content\fullcalendar.min.css" />
     <Content Include="Content\fullcalendar.print.css" />
     <Content Include="Content\home.css" />
+    <Content Include="Content\Images\burpeeBasic.png" />
+    <Content Include="Content\Images\pushup.png" />
+    <Content Include="Content\Images\wyskok.png" />
     <Content Include="Content\jquery.validate.bootstrap.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\main.css" />
@@ -1269,6 +1292,7 @@
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Tests\tests.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1310,6 +1334,17 @@
     <Content Include="Views\Hall\Index.cshtml" />
     <Content Include="Views\Accessory\EditAccessory.cshtml" />
     <Content Include="Views\Accessory\NewAccessory.cshtml" />
+    <Content Include="Views\Tests\Index.cshtml" />
+    <Content Include="Views\Tests\ZmodyfikowanaBurpeego.cshtml" />
+    <Content Include="Views\Tests\ProgresywnyBalke.cshtml" />
+    <Content Include="Views\Tests\Swimming.cshtml" />
+    <Content Include="Views\Tests\TestCoopera.cshtml" />
+    <Content Include="Views\Tests\WyskokDosiezny.cshtml" />
+    <Content Include="Views\Tests\Lian.cshtml" />
+    <Content Include="Views\Tests\StepTest.cshtml" />
+    <Content Include="Views\Tests\TestBrzuszkow.cshtml" />
+    <Content Include="Views\Tests\TestPompkowy.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1325,6 +1360,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801161930271_initial.resx">
       <DependentUpon>201801161930271_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801201147526_sex.resx">
+      <DependentUpon>201801201147526_sex.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

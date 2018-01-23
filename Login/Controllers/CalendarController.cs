@@ -84,6 +84,17 @@ namespace WebDBApp.Controllers
         }
 
         [HttpGet]
+        public ActionResult UserEvents()
+        {
+            var viewModel = new CalendarEventsViewModel(_unitOfWork);
+            var login = SessionHelper.GetElement<string>(SessionElement.Login);
+            var user = _unitOfWork.UserRepository.Find(login);
+            viewModel.SetEventsForUser(user);
+
+            return View("TrainerEvent",viewModel);
+        }
+
+        [HttpGet]
         public ActionResult NewEvent()
         {
             var viewModel = new NewCalendarEventViewModel();
@@ -185,7 +196,7 @@ namespace WebDBApp.Controllers
                 var oldEvent = _unitOfWork.CalendarEventsRepository.Find(id);
                 oldEvent.Trainer = null;
                 oldEvent.EventType = null;
-                oldEvent.Users = null;
+                oldEvent.Users.Clear();
                 _unitOfWork.CalendarEventsRepository.Remove(id);
 
 

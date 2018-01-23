@@ -26,7 +26,11 @@ namespace WebDBApp.ViewModels
         [CustomRequired]
         [Remote("IsEmail_Available", "Login")]
         [EmailAddress(ErrorMessage = "Niepoprawny format")]
-        public string Email { get; set; }       
+        public string Email { get; set; }
+
+        [CustomRequired]
+        //[RegularExpression(@"^.*(?=.{8,})(?=.*\d)(?=.*[A-Z]).*$", ErrorMessage = "Hasło musi zawierać przynajmniej 8 znaków, w tym przynajmniej jedną cyfrę 0-9 oraz jedną dużą literę")]
+        public bool Sex { get; set; }
 
         public RegisterAccountViewModel()
         {
