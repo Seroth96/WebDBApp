@@ -20,7 +20,7 @@ namespace WebDBApp.DAL
 
         public override List<CalendarEvent> All()
         {
-            var x = Set.Include(deb => deb.Trainer).ToList();
+            var x = Set.Include(deb => deb.Owner).Include(deb => deb.Building).Include(deb => deb.Room).ToList();
             return x;
         }
     }

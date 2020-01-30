@@ -57,16 +57,16 @@
                         Scheduler
                     </a>
                 </li>
-                <li>
+                @*<li>
                     <a href="@Url.Action("Index", "Tests" )">
                         <span class="glyphicon glyphicon-scale"></span>
                         Test Yourself!
                     </a>
-                </li>
-                @if(role == "Trener")
+                </li>*@
+                @if(role == "Organizator")
                 {
                 <li>
-                    <button type="button" class="btn navbar-btn dropdown-toggle" data-toggle="dropdown" style="color: #000">Trainer
+                    <button type="button" class="btn navbar-btn dropdown-toggle" data-toggle="dropdown" style="color: #000">Organizer
                         <span class="caret"></span>
                         <span class="sr-only"></span>
                     </button>
@@ -78,7 +78,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="@Url.Action("TrainerEvent", "Calendar" )">
+                            <a href="@Url.Action("OwnerEvent", "Calendar" )">
                                 <span class="glyphicon glyphicon-bookmark"></span>
                                 Your Events
                             </a>
@@ -98,7 +98,7 @@
                     </ul>  
                 </li> 
                 }
-                else if(role == "Pracownik" || role =="Administrator") 
+                else if(role =="Administrator") 
                 {
                 <li>
                     <button type="button" class="btn navbar-btn dropdown-toggle" data-toggle="dropdown"style="color: #000">Worker
@@ -113,9 +113,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="@Url.Action("Index", "Hall" )">
+                            <a href="@Url.Action("Index", "Room" )">
                                 <span class="glyphicon glyphicon-bookmark"></span>
-                                Halls
+                                Rooms
                             </a>
                         </li>
                     </ul>  
@@ -126,7 +126,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="@Url.Action("Index", "Profile" )">
-                        Your tests
+                        Your Meetings
                         <span class="glyphicon glyphicon-tent"></span>
                     </a>
                 </li>

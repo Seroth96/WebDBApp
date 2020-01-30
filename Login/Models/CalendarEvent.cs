@@ -22,10 +22,16 @@ namespace WebDBApp.Models
         [Required]
         public bool IsFullDay { get; set; } = false;
         [Required]
-        public User Trainer { get; set; }
+        public User Owner { get; set; }
+        [Required]
+        public Building Building { get; set; }
+        [Required]
+        public Room Room { get; set; }
 
         public virtual ICollection<User> Users { get; set; }
+
         public virtual EventType EventType {get; set;}
+
 
         public CalendarEvent()
         {

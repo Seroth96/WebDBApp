@@ -1,42 +1,74 @@
 ﻿@using WebDBApp.Helpers;
 @using WebDBApp.Enum;
-@model WebDBApp.ViewModels.ProfileViewModel
+@model WebDBApp.ViewModels.CalendarEventsViewModel
 @{
-    ViewBag.Title = "Your tests";
-}    
-    <div class="row">
-    <div class="col-md-6" style="float: none; margin: 0 auto;">
-        <div id="errorPlaceHolder"></div>
-    </div>
-</div>
+    ViewBag.Title = "Events";
+    var role = SessionHelper.GetElement<string>(SessionElement.Role);
+    }
     <table class="table table-bordered">
         <tr>
             <th>
-                Test Name
+                Title
             </th>
             <th>
-                Date
+                Description
             </th>
             <th>
-                Wynik  
+                Starts at
             </th>
-        </tr>
+            <th>
+                Ends at
+            </th>
+            <th>
+                Owner
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Buildng
+            </th>
+            <th>
+                Room
+            </th>
+            <th>
+                Participants
+            </th>
+            </tr>
 
-        @foreach (var test in Model.Tests) {
+        @foreach (var ev in Model.CalendarEvents) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => test.Name)
+                @Html.DisplayFor(modelItem => ev.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => test.DateOfTest)
+                @Html.DisplayFor(modelItem => ev.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => test.Wynik)
+                @Html.DisplayFor(modelItem => ev.StartAt)
             </td>
-            }
-                
-           
-        </tr>
+            <td>
+                @Html.DisplayFor(modelItem => ev.EndAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => ev.Owner.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => ev.EventType.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => ev.Building.BuildingDetails.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => ev.Room.Name)
+            </td>
+            <td>
+                @foreach (var participant in ev.Users)
+                {
+                    <p>@(participant.FullName)</p>
+                }
+            </td>
+            </tr>
         }
 
     </table>

@@ -21,7 +21,7 @@
                 Ends at
             </th>
             <th>
-                Trainer
+                Owner
             </th>
             <th>
                 Type
@@ -47,7 +47,7 @@
                 @Html.DisplayFor(modelItem => ev.EndAt)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => ev.Trainer.FullName)
+                @Html.DisplayFor(modelItem => ev.Owner.FullName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => ev.EventType.Name)

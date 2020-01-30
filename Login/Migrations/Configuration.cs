@@ -44,13 +44,9 @@ namespace WebDBApp.Migrations
             {
                 context.Roles.Add(new Models.Role { Name = "Administrator" });
             }
-            if (!context.Roles.Any(role => role.Name.Equals("Trener")))
+            if (!context.Roles.Any(role => role.Name.Equals("Organizator")))
             {
-                context.Roles.Add(new Models.Role { Name = "Trener" });
-            }
-            if (!context.Roles.Any(role => role.Name.Equals("Pracownik")))
-            {
-                context.Roles.Add(new Models.Role { Name = "Pracownik" });
+                context.Roles.Add(new Models.Role { Name = "Organizator" });
             }
 
             if (!context.EventTypes.Any(type => type.Name.Equals("Hard")))

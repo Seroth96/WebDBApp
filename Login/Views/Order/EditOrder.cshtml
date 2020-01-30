@@ -14,7 +14,7 @@
             <div class="form-group">
                 <label for="Title" class="col-sm-3 control-label">TITLE</label>
                 <div class="col-sm-6">
-                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control"})
+                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
                 </div>
                 <div class="col-sm-3">
                     @Html.ValidationMessageFor(x => x.Title)
@@ -28,7 +28,7 @@
                 <div class="col-sm-3">
                     @Html.ValidationMessageFor(x => x.Amount)
                 </div>
-            </div>                      
+            </div>
             <div class="form-group">
                 <label for="Description" class="col-sm-3 control-label">DESCRIPTION</label>
                 <div class="col-sm-6">
@@ -38,10 +38,22 @@
                     @Html.ValidationMessageFor(x => x.Description)
                 </div>
             </div>
+            <div class="form-group">
+                <label for="SelectedBuilding" class="col-sm-3 control-label">BUILDING</label>
+                <div class="col-sm-6">
+                    @Html.DropDownListFor(model => model.SelectedBuilding, new SelectList(Model.Buildings, "Id", "BuildingDetails.Name"), "Choose... ", new { @class = "form-control dropdown", @onchange = "FillRooms()" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="SelectedRoom" class="col-sm-3 control-label">ROOM</label>
+                <div class="col-sm-6">
+                    <select id="SelectedRoom" name="SelectedRoom" class="form-control dropdown"></select>
+                </div>
+            </div>
 
             <div id="bottomMenu" class="col-md-offset-3 col-md-6">
                 <input type="submit" class="btn btn-success" value="WYŚLIJ" />
-                <input type="button" class="btn btn-warning" value="ANULUJ" onclick="window.location = '/Order/OrdersForUser';" />                
+                <input type="button" class="btn btn-warning" value="ANULUJ" onclick="window.location = '/Order/OrdersForUser';" />
             </div>
         </form>
         <form class="form-inline" action="/Order/DeleteOrder" method="POST">
@@ -51,3 +63,30 @@
     </div>
 </div>
 
+
+<script type="text/javascript">
+
+    function FillRooms() {
+        var buildingId = $('#SelectedBuilding').val();
+        $.ajax({
+            url: '/Room/GetRoomsByBuilding',
+            type: "GET",
+            dataType: "JSON",
+            data: { id: buildingId },
+            success: function (rooms) {
+                $("#SelectedRoom")
+                    .empty()
+                    .append('<option selected="selected" value="-1">Choose...</option>')
+                var ddl = document.getElementById("SelectedRoom");
+                for (var i = 0; i < rooms.length; i++) {
+                    var option = document.createElement("OPTION");
+
+                    option.innerHTML = rooms[i].Text;
+                    option.value = rooms[i].Value;
+
+                    ddl.options.add(option);
+                }
+            }
+        });
+    }
+</script>

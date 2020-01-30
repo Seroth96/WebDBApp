@@ -45,7 +45,7 @@ namespace WebDBApp.Models
         [Required]
         virtual public Role Role { get; set; }
 
-        virtual public ICollection<Test> Tests { get; set; }
+       // virtual public ICollection<Test> Tests { get; set; }
 
         public virtual ICollection<CalendarEvent> CalendarEvents { get; set; }
 
@@ -62,7 +62,7 @@ namespace WebDBApp.Models
         public User()
         {
             this.CalendarEvents = new List<CalendarEvent>();
-            this.Tests = new List<Test>();
+            //this.Tests = new List<Test>();
         }
     }
 }

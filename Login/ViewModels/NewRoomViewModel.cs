@@ -9,7 +9,7 @@ using WebDBApp.Models;
 
 namespace WebDBApp.ViewModels
 {
-    public class NewHallViewModel
+    public class NewRoomViewModel
     {
         [Required]
         public int ID { get; set; }
@@ -18,12 +18,12 @@ namespace WebDBApp.ViewModels
         [Required]
         public double SurfaceArea { get; set; }
 
-        public IEnumerable<Gym> Gyms { get; set; }
+        public IEnumerable<Building> Buildings { get; set; }
         public List<SelectListItem> choices { get; set; }
-        public int SelectedGym { get; set; }
+        public int SelectedBuilding { get; set; }
 
 
-        public NewHallViewModel()
+        public NewRoomViewModel()
         {
             choices = new List<SelectListItem>();
 

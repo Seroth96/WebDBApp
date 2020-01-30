@@ -1,6 +1,8 @@
 ﻿@model WebDBApp.ViewModels.NewCalendarEventViewModel
 @{
     ViewBag.Title = "New Event";
+    Model.StartAt = DateTime.Now;
+    Model.EndAt = DateTime.Now;
 }
 
 <div class="row">
@@ -13,12 +15,12 @@
             <div class="form-group">
                 <label for="Title" class="col-sm-3 control-label">TITLE</label>
                 <div class="col-sm-6">
-                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control"})
+                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
                 </div>
                 <div class="col-sm-3">
                     @Html.ValidationMessageFor(x => x.Title)
                 </div>
-            </div>            
+            </div>
             <div class="form-group">
                 <label for="Description" class="col-sm-3 control-label">DESCRIPTION</label>
                 <div class="col-sm-6">
@@ -28,25 +30,19 @@
                     @Html.ValidationMessageFor(x => x.Description)
                 </div>
             </div>
-            <div class="form-group">                
+            <div class="form-group">
                 <label for="StartAt" class="col-sm-3 control-label">STARTS AT</label>
-                <div class='col-sm-6 input-group date' id='datetimepicker6'>
-                    @Html.TextBoxFor(x => x.StartAt, new { @class = "form-control" })
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
+                <div class='col-sm-6 input-group date ' id='datetimepicker6'>
+                    @Html.TextBoxFor(x => x.StartAt, new { @type = "date", @class = "form-control datetimepicker", @Value = Model.StartAt.ToString("yyyy-MM-dd hh:mm") })
                 </div>
                 <div class="col-sm-3">
                     @Html.ValidationMessageFor(x => x.StartAt)
-                </div>               
-            </div>                
+                </div>
+            </div>
             <div class="form-group">
                 <label for="EndAt" class="col-sm-3 control-label">ENDS AT</label>
                 <div class='col-sm-6 input-group date' id='datetimepicker7'>
-                    @Html.TextBoxFor(x => x.EndAt, new { @class = "form-control" })
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
+                    @Html.TextBoxFor(x => x.EndAt, new { @type = "date", @class = "form-control datetimepicker", @Value = Model.EndAt.ToString("yyyy-MM-dd hh:mm") })
                 </div>
                 <div class="col-sm-3">
                     @Html.ValidationMessageFor(x => x.EndAt)
@@ -55,31 +51,73 @@
             <div class="form-group">
                 <label for="SelectedType" class="col-sm-3 control-label">TYPE</label>
                 <div class="col-sm-6">
-                    @Html.DropDownListFor(model => model.SelectedType , new SelectList(Model.choices, "Value", "Text"), "Choose... ", new { @class="form-control dropdown" })
+                    @Html.DropDownListFor(model => model.SelectedType, new SelectList(Model.choices, "Value", "Text"), "Choose... ", new { @class = "form-control dropdown" })
                 </div>
-            </div>           
-           
+            </div>
+            <div class="form-group">
+                <label for="SelectedBuilding" class="col-sm-3 control-label">BUILDING</label>
+                <div class="col-sm-6">
+                    @Html.DropDownListFor(model => model.SelectedBuilding, new SelectList(Model.Buildings, "Id", "BuildingDetails.Name"), "Choose... ", new { @class = "form-control dropdown", @onchange = "FillRooms()" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="SelectedRoom" class="col-sm-3 control-label">ROOM</label>
+                <div class="col-sm-6">
+                    <select id="SelectedRoom" name="SelectedRoom" class="form-control dropdown"></select>
+                </div>
+            </div>
+
 
 
             <div id="bottomMenu" class="col-md-offset-3 col-md-6">
                 <input type="submit" class="btn btn-success" value="WYŚLIJ" />
-                <input type="button" class="btn btn-warning" value="ANULUJ" onclick="window.location = '/Calendar';" />
+                <input type="button" class="btn btn-warning" value="ANULUJ" onclick="window.location = '/Calendar'" />
             </div>
         </form>
     </div>
 </div>
 
 <script type="text/javascript">
-    $(function () {
-        $('#datetimepicker6').datetimepicker();
-        $('#datetimepicker7').datetimepicker({
-            useCurrent: false //Important! See issue #1075
+
+    //$('#datetimepicker6').datepicker();
+    //$('#datetimepicker7').datepicker();
+   
+    //$(function () {
+    //    $('#datetimepicker6').datetimepicker({
+    //    });
+    //    $('#datetimepicker7').datetimepicker({
+    //        useCurrent: false
+    //    });
+
+    //    $("#datetimepicker6").on("dp.change", function (e) {
+    //        $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+    //    });
+    //    $("#datetimepicker7").on("dp.change", function (e) {
+    //        $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+    //    });
+    //});
+
+    function FillRooms() {
+        var buildingId = $('#SelectedBuilding').val();
+        $.ajax({
+            url: '/Room/GetRoomsByBuilding',
+            type: "GET",
+            dataType: "JSON",
+            data: { id: buildingId },
+            success: function (rooms) {
+                $("#SelectedRoom")
+                    .empty()
+                    .append('<option selected="selected" value="-1">Choose...</option>')
+                var ddl = document.getElementById("SelectedRoom");
+                for (var i = 0; i < rooms.length; i++) {
+                    var option = document.createElement("OPTION");
+
+                    option.innerHTML = rooms[i].Text;
+                    option.value = rooms[i].Value;
+
+                    ddl.options.add(option);
+                }
+            }
         });
-        $("#datetimepicker6").on("dp.change", function (e) {
-            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-        });
-        $("#datetimepicker7").on("dp.change", function (e) {
-            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-        });
-    });
+    }
 </script>

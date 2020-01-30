@@ -1,4 +1,6 @@
 ﻿var app = angular.module('myApp', ['ui.calendar', 'ui.bootstrap']);
+
+
 app.controller('myNgController', ['$scope', '$http', 'uiCalendarConfig', function ($scope, $http, uiCalendarConfig) {
 
     $scope.SelectedEvent =null;
@@ -6,6 +8,11 @@ app.controller('myNgController', ['$scope', '$http', 'uiCalendarConfig', functio
 
     $scope.events = [];
 
+    $scope.convertToDate = function (stringDate) {
+        var dateOut = new Date(stringDate);
+        dateOut.setDate(dateOut.getDate() + 1);
+        return dateOut;
+    };
 
     $scope.EventsEasy = {
         color: 'lightblue',
@@ -61,7 +68,9 @@ app.controller('myNgController', ['$scope', '$http', 'uiCalendarConfig', functio
                 description: value.Description,
                 start: new Date(value.StartAt),
                 end: new Date(value.EndAt),
-                trainer: value.Trainer,
+                owner: value.Owner,
+                building: value.Building,
+                room: value.Room,
                 id: value.ID,
                 DidJoin: value.DidJoin,
                 stick: true
@@ -82,7 +91,9 @@ app.controller('myNgController', ['$scope', '$http', 'uiCalendarConfig', functio
                 start: new Date(value.StartAt),
                 end: new Date(value.EndAt),
                 allDay: value.IsFullDay,
-                trainer: value.Trainer,
+                owner: value.Owner,
+                building: value.Building,
+                room: value.Room,
                 id: value.ID,
                 DidJoin: value.DidJoin,
                 stick: true
@@ -103,7 +114,9 @@ app.controller('myNgController', ['$scope', '$http', 'uiCalendarConfig', functio
                 start: new Date(value.StartAt),
                 end: new Date(value.EndAt),
                 allDay: value.IsFullDay,
-                trainer: value.Trainer,
+                owner: value.Owner,
+                building: value.Building,
+                room: value.Room,
                 id: value.ID,
                 DidJoin: value.DidJoin,
                 stick: true

@@ -18,10 +18,10 @@ namespace WebDBApp.DAL
         public CalendarEventsRepository CalendarEventsRepository { get; set; }
         public AccessoryRepository AccessoryRepository { get; set; }
         public EventTypeRepository EventTypeRepository { get; set; }
-        public HallRepository HallRepository { get; set; }
+        public RoomRepository RoomRepository { get; set; }
         public OrderRepository OrderRepository { get; set; }
-        public GymRepository GymRepository { get; set; }
-        public TestRepository TestRepository { get; set; }
+        public BuildingRepository BuildingRepository { get; set; }
+        //public TestRepository TestRepository { get; set; }
 
         public UnitOfWork()
         {
@@ -32,10 +32,10 @@ namespace WebDBApp.DAL
             CalendarEventsRepository = new CalendarEventsRepository(Context);
             AccessoryRepository = new AccessoryRepository(Context);
             EventTypeRepository = new EventTypeRepository(Context);
-            HallRepository = new HallRepository(Context);
+            RoomRepository = new RoomRepository(Context);
             OrderRepository = new OrderRepository(Context);
-            GymRepository = new GymRepository(Context);
-            TestRepository = new TestRepository(Context);
+            BuildingRepository = new BuildingRepository(Context);
+           // TestRepository = new TestRepository(Context);
         }
 
         public void SaveChanges()

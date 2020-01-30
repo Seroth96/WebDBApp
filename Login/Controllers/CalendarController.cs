@@ -59,11 +59,13 @@ namespace WebDBApp.Controllers
                 ID = x.CalendarEventID,
                 Title = x.Title,
                 Description = x.Description,
-                StartAt = x.StartAt.ToString(@"MM\/dd\/yyyy HH:mm:ss"),
-                EndAt = x.EndAt.ToString(@"MM\/dd\/yyyy HH:mm:ss"),
+                StartAt = x.StartAt.ToString("yyyy-MM-ddTHH:mm:ss"),
+                EndAt = x.EndAt.ToString("yyyy-MM-ddTHH:mm:ss"),
                 IsFullDay = x.IsFullDay,
                 EventType = x.EventType,
-                Trainer = x.Trainer.FullName,
+                Owner = x.Owner.FullName,
+                Building = x.Building.BuildingDetails.Name + ", " + x.Building.BuildingDetails.Address,
+                Room = x.Room.Name,
                 DidJoin = x.Users.Any(user => user.Login.Equals(SessionHelper.GetElement<string>(SessionElement.Login)))
             });
 
@@ -73,7 +75,7 @@ namespace WebDBApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult TrainerEvent()
+        public ActionResult OwnerEvent()
         {
             var viewModel = new CalendarEventsViewModel(_unitOfWork);
             var login = SessionHelper.GetElement<string>(SessionElement.Login);
@@ -94,6 +96,8 @@ namespace WebDBApp.Controllers
                 Value = r.ID.ToString()
             });
             viewModel.choices.AddRange(x);
+            viewModel.SelectedBuilding = 0;
+            viewModel.Buildings = _unitOfWork.BuildingRepository.All();
             return View(viewModel);
         }
 
@@ -105,11 +109,13 @@ namespace WebDBApp.Controllers
                 var login = SessionHelper.GetElement<string>(SessionElement.Login);
                 _unitOfWork.CalendarEventsRepository.Add(new CalendarEvent
                 {
-                    Trainer = _unitOfWork.UserRepository.Find(login),
+                    Owner = _unitOfWork.UserRepository.Find(login),
                     StartAt = viewModel.StartAt,
                     EndAt = viewModel.EndAt,
                     Title = viewModel.Title,
                     EventType = _unitOfWork.EventTypeRepository.Find(viewModel.SelectedType),
+                    Building = _unitOfWork.BuildingRepository.Find(viewModel.SelectedBuilding),
+                    Room = _unitOfWork.RoomRepository.Find(viewModel.SelectedRoom),
                     Description = viewModel.Description            
                 });
 
@@ -121,12 +127,12 @@ namespace WebDBApp.Controllers
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return PartialView("~/Views/PartialViews/Error.cshtml", ex.Message);
             }
-            return RedirectToAction("TrainerEvent");
+            return RedirectToAction("OwnerEvent");
         }
 
 
         [HttpGet]
-        [CheckSession(Role = new string[] { "Trener" })]
+        [CheckSession(Role = new string[] { "Organizator" })]
         public ActionResult EditEvent(int id)
         {
             var viewModel = new NewCalendarEventViewModel();
@@ -136,7 +142,8 @@ namespace WebDBApp.Controllers
                 Text = r.Name,
                 Value = r.ID.ToString()
             });
-            viewModel.choices.AddRange(x);
+            viewModel.choices.AddRange(x);            
+            viewModel.Buildings = _unitOfWork.BuildingRepository.All();
             var login = SessionHelper.GetElement<string>(SessionElement.Login);
             var user = _unitOfWork.UserRepository.Find(login);
             var @event = _unitOfWork.CalendarEventsRepository.All().First(d => d.CalendarEventID == id);
@@ -146,13 +153,15 @@ namespace WebDBApp.Controllers
             viewModel.StartAt = @event.StartAt;
             viewModel.EndAt = @event.EndAt;
             viewModel.SelectedType = @event.EventType.ID;
-            viewModel.Trainer = user;
+            viewModel.SelectedBuilding = @event.Building.ID;
+            viewModel.SelectedRoom = @event.Room.ID;
+            viewModel.Owner = user;
 
             return View(viewModel);
         }
 
         [HttpPost]
-        [CheckSession(Role = new string[] { "Trener" })]
+        [CheckSession(Role = new string[] { "Organizator" })]
         public ActionResult EditEvent(NewCalendarEventViewModel viewModel)
         {
             if (ModelState.IsValid)
@@ -165,33 +174,36 @@ namespace WebDBApp.Controllers
                 @event.Description = viewModel.Description;
                 @event.StartAt = viewModel.StartAt;
                 @event.EndAt = viewModel.EndAt;
-                @event.EventType = _unitOfWork.EventTypeRepository.Find(viewModel.SelectedType); 
-                @event.Trainer = user;
+                @event.EventType = _unitOfWork.EventTypeRepository.Find(viewModel.SelectedType);
+                @event.Building = _unitOfWork.BuildingRepository.Find(viewModel.SelectedBuilding);
+                @event.Room = _unitOfWork.RoomRepository.Find(viewModel.SelectedRoom);
+                @event.Owner = user;
                 @event.Users.Clear();
 
                 _unitOfWork.SaveChanges();
-                return RedirectToAction("TrainerEvent");
+                return RedirectToAction("OwnerEvent");
             }
 
             return View(viewModel);
         }
 
         [HttpPost]
-        [CheckSession(Role = new string[] { "Trener" })]
+        [CheckSession(Role = new string[] { "Organizator" })]
         public ActionResult DeleteEvent(int id)
         {
             if (ModelState.IsValid)
             {
                 var oldEvent = _unitOfWork.CalendarEventsRepository.Find(id);
-                oldEvent.Trainer = null;
+                oldEvent.Owner = null;
                 oldEvent.EventType = null;
+                oldEvent.Building = null;
+                oldEvent.Room = null;
                 oldEvent.Users = null;
                 _unitOfWork.CalendarEventsRepository.Remove(id);
 
-
                 _unitOfWork.SaveChanges();
             }
-            return RedirectToAction("TrainerEvent");
+            return RedirectToAction("OwnerEvent");
         }
 
     }

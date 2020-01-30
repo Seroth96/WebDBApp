@@ -18,18 +18,18 @@ namespace WebDBApp.ViewModels
         private readonly IUnitOfWork _unitOfWork;
 
 
-        public IEnumerable<Gym> Gyms { get; set; }
+        public IEnumerable<Building> Buildings { get; set; }
         
 
         public HomeViewModel(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            SetGyms();
+            SetBuildings();
         }
 
-        private void SetGyms()
+        private void SetBuildings()
         {
-            Gyms = _unitOfWork.GymRepository.All().ToList();
+            Buildings = _unitOfWork.BuildingRepository.All().ToList();
         }
         
     }

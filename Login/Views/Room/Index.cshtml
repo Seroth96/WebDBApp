@@ -1,17 +1,17 @@
 ﻿@using WebDBApp.Helpers;
 @using WebDBApp.Enum;
-@model WebDBApp.ViewModels.HallViewModel
+@model WebDBApp.ViewModels.RoomViewModel
 @{
-    ViewBag.Title = "Halls";
+    ViewBag.Title = "Rooms";
     var role = SessionHelper.GetElement<string>(SessionElement.Role);
     }
     <table class="table table-bordered">
         <tr>
             <th>
-                Gym
+                Building
             </th>
             <th>
-                Hall Name
+                Room Name
             </th>            
             <th>
                 Surface Area
@@ -23,13 +23,13 @@
             <th></th>
         </tr>
 
-        @foreach (var gym in Model.Gyms) {
-        
-            foreach(var ev in gym.Halls)
+        @foreach (var building in Model.Buildings) {
+
+            foreach(var ev in building.Rooms)
             {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => gym.GymDetails.Name)
+                @Html.DisplayFor(modelItem => building.BuildingDetails.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => ev.Name)
@@ -61,7 +61,7 @@
             <td>
                 @if(role == "Administrator")
                 {
-                <a href="@Url.Action(" EditHall", "Hall" , new { id=ev.ID })">
+                <a href="@Url.Action("EditRoom", "Room" , new { id=ev.ID })">
                     Edit
                     <span class="glyphicon glyphicon-edit"></span>
                 </a>
@@ -78,7 +78,7 @@
     {
     <div class="row center-block">
         <div class="col-lg-2">
-            <input type="button" class="btn btn-success" onclick="window.location = '/Hall/NewHall';" value="Add Hall"/>
+            <input type="button" class="btn btn-success" onclick="window.location = '/Room/NewRoom';" value="Add Room"/>
         </div>
        
     </div>

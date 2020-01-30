@@ -16,7 +16,7 @@ namespace WebDBApp.ViewModels
         [Required]
         public string Description { get; set; }
         [Required]
-        public Hall Hall { get; set; }
+        public Room Room { get; set; }
 
 
         public NewAccessoryViewModel()

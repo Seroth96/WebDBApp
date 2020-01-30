@@ -1,0 +1,42 @@
+﻿@using WebDBApp.Helpers;
+@using WebDBApp.Enum;
+@model WebDBApp.ViewModels.ProfileViewModel
+@{
+    ViewBag.Title = "Your Profile";
+}    
+    <div class="row">
+    <div class="col-md-6" style="float: none; margin: 0 auto;">
+        <div id="errorPlaceHolder"></div>
+    </div>
+</div>
+    @*<table class="table table-bordered">
+        <tr>
+            <th>
+                Test Name
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Wynik  
+            </th>
+        </tr>
+
+        @foreach (var test in Model.Tests) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => test.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => test.DateOfTest)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => test.Wynik)
+            </td>
+            }
+                
+           
+        </tr>
+        }
+
+    </table>*@

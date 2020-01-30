@@ -11,10 +11,12 @@
         <div class="col-lg-3">
             <div ng-show="SelectedEvent" class="alert alert-success" style="margin-top:50px">
                 <h2 style="margin-top:0px; font-family: Arial; font-size: 30px; font-weight:bolder">{{SelectedEvent.title}}</h2>
-                <h3 style="color:#A9A50E"><strong>Trainer: </strong> {{SelectedEvent.trainer}}</h3>
+                <h3 style="color:#A9A50E"><strong>Owner: </strong> {{SelectedEvent.owner}}</h3>
                 <p><strong>Description: </strong> {{SelectedEvent.description}}</p>
-                <p><strong>Starts at: </strong> {{SelectedEvent.start | date:'MM/dd/yyyy'}}</p>
-                <p><strong>Ends at: </strong> {{SelectedEvent.end | date:'MM/dd/yyyy'}}</p>                
+                <p><strong>Place: </strong> {{SelectedEvent.building}}</p>
+                <p><strong>Room: </strong> {{SelectedEvent.room}}</p>
+                <p><strong>Starts at: </strong><span ng-bind="convertToDate(SelectedEvent.start) | date:'dd/MM/yyyy'"></span></p>
+                <p ><strong>Ends at: </strong><span ng-bind="convertToDate(SelectedEvent.end) | date:'dd/MM/yyyy'"></span></p>
                 <p>
                     <a ng-if="SelectedEvent.DidJoin == false" href="@Url.Action("JoinEvent", "Calendar" )?id={{SelectedEvent.id}}">
                         Join
@@ -32,7 +34,7 @@
     </div>
 </div>
 
-@* OUR ANGULAR COMPONENTs *@
+@* MY ANGULAR COMPONENTs *@
 <script src="~/Scripts/calendar/MyApp.js"></script>
 
 <style>

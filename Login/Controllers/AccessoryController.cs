@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Login.Database;
 using WebDBApp.ViewModels;
 using WebDBApp.Interfaces;
 using System.Net;
@@ -26,18 +25,18 @@ namespace WebDBApp.Controllers
        
 
         [HttpGet]
-        [CheckSession(Role = new string[] { "Administrator", "Pracownik" })]
+        [CheckSession(Role = new string[] { "Administrator"})]
         public ActionResult NewAccessory(int id)
         {
             var viewModel = new NewAccessoryViewModel();
-            viewModel.Hall = _unitOfWork.HallRepository.Find(id);
+            viewModel.Room = _unitOfWork.RoomRepository.Find(id);
             
 
             return View(viewModel);
         }
 
         [HttpPost]
-        [CheckSession(Role = new string[] { "Administrator", "Pracownik" })]
+        [CheckSession(Role = new string[] { "Administrator"})]
         public ActionResult NewAccessory(NewAccessoryViewModel viewModel)
         {
             try
@@ -48,8 +47,8 @@ namespace WebDBApp.Controllers
                     Description = viewModel.Description
                 };
 
-                var hall = _unitOfWork.HallRepository.Find(viewModel.Hall.ID);
-                hall.Accessories.Add(accessory);
+                var room = _unitOfWork.RoomRepository.Find(viewModel.Room.ID);
+                room.Accessories.Add(accessory);
 
                 _unitOfWork.SaveChanges();
 
@@ -60,16 +59,16 @@ namespace WebDBApp.Controllers
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return PartialView("~/Views/PartialViews/Error.cshtml", ex.Message);
             }
-            return RedirectToAction("Index","Hall");
+            return RedirectToAction("Index","Room");
         }
 
         [HttpGet]
-        [CheckSession(Role = new string[] { "Administrator", "Pracownik" })]
+        [CheckSession(Role = new string[] { "Administrator" })]
         public ActionResult EditAccessory(int id)
         {
             var viewModel = new EditAccessoriesViewModel();
             viewModel.ID = id;
-            viewModel.Accessories = _unitOfWork.HallRepository.Find(id).Accessories.ToList();
+            viewModel.Accessories = _unitOfWork.RoomRepository.Find(id).Accessories.ToList();
             var x = viewModel.Accessories.Select(r => new SelectListItem
             {
                 Text = r.Name,
@@ -80,7 +79,7 @@ namespace WebDBApp.Controllers
         }
 
         [HttpPost]
-        [CheckSession(Role = new string[] { "Administrator", "Pracownik" })]
+        [CheckSession(Role = new string[] { "Administrator" })]
         public ActionResult EditAccessory(EditAccessoriesViewModel viewModel)
         {
             if (ModelState.IsValid)
@@ -90,14 +89,14 @@ namespace WebDBApp.Controllers
                 oldAccessory.Description = viewModel.Description;
 
                 _unitOfWork.SaveChanges();
-                return RedirectToAction("Index", "Hall");
+                return RedirectToAction("Index", "Room");
             }
 
             return View(viewModel);
         }
 
         [HttpPost]
-        [CheckSession(Role = new string[] { "Administrator", "Pracownik" })]
+        [CheckSession(Role = new string[] { "Administrator" })]
         public ActionResult DeleteAccessory(int selectedAccesory)
         {
             if (ModelState.IsValid)
@@ -109,7 +108,7 @@ namespace WebDBApp.Controllers
 
                 _unitOfWork.SaveChanges();
             }
-            return RedirectToAction("Index", "Hall");
+            return RedirectToAction("Index", "Room");
         }
 
         

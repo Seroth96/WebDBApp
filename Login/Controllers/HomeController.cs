@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Login.Database;
 using WebDBApp.ViewModels;
 using WebDBApp.Interfaces;
 using System.Net;
+using WebDBApp.Models;
 
 namespace WebDBApp.Controllers
 {
@@ -46,41 +46,41 @@ namespace WebDBApp.Controllers
 
         [HttpGet]
         [CheckSession(Role = new string[] { "Administrator" })]
-        public ActionResult NewGym()
+        public ActionResult NewBuilding()
         {
-            var viewModel = new GymViewModel();
+            var viewModel = new BuildingViewModel();
             return View(viewModel);
         }
 
         [HttpGet]
         [CheckSession(Role = new string[] { "Administrator" })]
-        public ActionResult EditGym(int id)
+        public ActionResult EditBuilding(int id)
         {
-            var viewModel = new GymViewModel();
-            var gym = _unitOfWork.GymRepository.Find(id);
-            viewModel.ID = gym.ID;
-            viewModel.Name = gym.GymDetails.Name;
-            viewModel.Address = gym.GymDetails.Address;
-            viewModel.Email = gym.GymDetails.Email;
-            viewModel.ContactPhone = gym.GymDetails.ContactPhone;
-            viewModel.Description = gym.GymDetails.Description;
+            var viewModel = new BuildingViewModel();
+            var building = _unitOfWork.BuildingRepository.Find(id);
+            viewModel.ID = building.ID;
+            viewModel.Name = building.BuildingDetails.Name;
+            viewModel.Address = building.BuildingDetails.Address;
+            viewModel.Email = building.BuildingDetails.Email;
+            viewModel.ContactPhone = building.BuildingDetails.ContactPhone;
+            viewModel.Description = building.BuildingDetails.Description;
 
             return View(viewModel);
         }
 
         [HttpPost]
         [CheckSession(Role = new string[] { "Administrator" })]
-        public ActionResult EditGym(GymViewModel viewModel)
+        public ActionResult EditBuilding(BuildingViewModel viewModel)
         {
             if (ModelState.IsValid)
             {                
-                var oldGym = _unitOfWork.GymRepository.Find(viewModel.ID);
+                var oldBuilding = _unitOfWork.BuildingRepository.Find(viewModel.ID);
 
-                oldGym.GymDetails.Name = viewModel.Name;
-                oldGym.GymDetails.Address = viewModel.Address;
-                oldGym.GymDetails.Email = viewModel.Email;
-                oldGym.GymDetails.ContactPhone = viewModel.ContactPhone;
-                oldGym.GymDetails.Description = viewModel.Description;               
+                oldBuilding.BuildingDetails.Name = viewModel.Name;
+                oldBuilding.BuildingDetails.Address = viewModel.Address;
+                oldBuilding.BuildingDetails.Email = viewModel.Email;
+                oldBuilding.BuildingDetails.ContactPhone = viewModel.ContactPhone;
+                oldBuilding.BuildingDetails.Description = viewModel.Description;               
 
 
                 _unitOfWork.SaveChanges();
@@ -92,14 +92,14 @@ namespace WebDBApp.Controllers
 
         [HttpPost]
         [CheckSession(Role = new string[] { "Administrator" })]
-        public ActionResult DeleteGym(int id)
+        public ActionResult DeleteBuilding(int id)
         {
             if (ModelState.IsValid)
             {
-                var oldGym = _unitOfWork.GymRepository.Find(id);
+                var oldBuilding = _unitOfWork.BuildingRepository.Find(id);
 
-                oldGym.GymDetails = null;
-                _unitOfWork.GymRepository.Remove(id);
+                oldBuilding.BuildingDetails = null;
+                _unitOfWork.BuildingRepository.Remove(id);
 
 
                 _unitOfWork.SaveChanges();
@@ -108,14 +108,35 @@ namespace WebDBApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult NewGym(GymViewModel viewModel)
+        public ActionResult NewBuilding(BuildingViewModel viewModel)
         {
             try
             {
-                MTABEntities entities = new MTABEntities();
-                entities.newGym(viewModel.Name, viewModel.Address, viewModel.Description, viewModel.ContactPhone, viewModel.Email);
+                var building = new Building
+                {
+                    BuildingDetails = new BuildingDetails
+                    {
+                        Name = viewModel.Name,
+                        Address = viewModel.Address,
+                        Description = viewModel.Description,
+                        ContactPhone = viewModel.ContactPhone,
+                        Email = viewModel.Email
+                    },
+                    Rooms = new List<Room>()
+                    {
+                        new Room
+                        {
+                            Name = "Main",
+                            SurfaceArea = 50
+                        }
+                    }
+                };
+
+                _unitOfWork.BuildingRepository.Add(building);
+
+                _unitOfWork.SaveChanges();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 logger.Error(ex, ex.Message);
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;

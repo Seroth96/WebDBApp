@@ -18,7 +18,10 @@ namespace WebDBApp.ViewModels
         private readonly IUnitOfWork _unitOfWork;
         public IEnumerable<EventType> Types { get; set; }
         public List<SelectListItem> choices { get; set; }
+        public IEnumerable<Building> Buildings { get; set; }
         public int SelectedType { get; set; }
+        public int SelectedBuilding { get; set; }
+        public int SelectedRoom { get; set; }
 
         [Required]
         public int ID { get; set; }
@@ -26,12 +29,14 @@ namespace WebDBApp.ViewModels
         public string Title { get; set; }
         [Required]
         public string Description { get; set; }
+
         [Required]
         public DateTime StartAt { get; set; }
+
         [Required]
         public DateTime EndAt { get; set; }    
           
-        public User Trainer { get; set; }
+        public User Owner { get; set; }
 
 
         

@@ -1,2 +1,7 @@
-2018-01-14 13:18:28.1535|ERROR|Login.Controllers.UsersController|Sekwencja nie zawiera elementÛw.
-2018-01-14 13:19:32.6262|ERROR|Login.Controllers.UsersController|Sekwencja nie zawiera elementÛw.
+2018-01-15 14:21:08.9333|ERROR|WebDBApp.Controllers.AccessoryController|Odwo≥anie do obiektu nie zosta≥o ustawione na wystπpienie obiektu.
+2018-01-16 20:05:51.5324|ERROR|WebDBApp.Controllers.HomeController|An error occurred while executing the command definition. See the inner exception for details.
+2018-01-16 20:06:25.0543|ERROR|WebDBApp.Controllers.HomeController|An error occurred while executing the command definition. See the inner exception for details.
+2018-01-16 20:43:46.6375|ERROR|WebDBApp.Controllers.CalendarController|Pole Title jest wymagane. Title Pole Description jest wymagane. Description 
+2020-01-26 22:50:22.5842|ERROR|WebDBApp.Controllers.LoginController|Serwer SMTP wymaga bezpiecznego po≥πczenia lub nie uwierzytelniono klienta. Odpowiedü serwera: 5.7.0 Authentication Required. Learn more at
+2020-01-26 22:53:06.4517|ERROR|WebDBApp.Controllers.LoginController|Serwer SMTP wymaga bezpiecznego po≥πczenia lub nie uwierzytelniono klienta. Odpowiedü serwera: 5.7.0 Authentication Required. Learn more at
+2020-01-26 23:02:53.0777|ERROR|WebDBApp.Controllers.LoginController|Serwer SMTP wymaga bezpiecznego po≥πczenia lub nie uwierzytelniono klienta. Odpowiedü serwera: 5.7.0 Authentication Required. Learn more at

@@ -29,8 +29,13 @@ namespace WebDBApp.ViewModels
 
         public void SetEvents(User user)
         {
-            CalendarEvents = _unitOfWork.CalendarEventsRepository.All().Where(ev => ev.Trainer.Login == user.Login).ToList();
+            CalendarEvents = _unitOfWork.CalendarEventsRepository.All().Where(ev => ev.Owner.Login == user.Login).ToList();
         }
-        
+
+        public void SetEventsForUser(User user)
+        {
+            CalendarEvents = _unitOfWork.CalendarEventsRepository.All().Where(ev => ev.Users.Any(u => u.Login == user.Login)).ToList();
+        }
+
     }
 }

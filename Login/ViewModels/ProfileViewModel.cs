@@ -18,19 +18,19 @@ namespace WebDBApp.ViewModels
         private readonly IUnitOfWork _unitOfWork;
 
 
-        public IEnumerable<Test> Tests { get; set; }
+      //  public IEnumerable<Test> Tests { get; set; }
         
 
         public ProfileViewModel(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            Tests = new List<Test>();
+           // Tests = new List<Test>();
         }      
 
-        public void SetTestsforUser(User user)
-        {
-            Tests = _unitOfWork.TestRepository.All().Where(test => test.User.Login == user.Login).ToList();
-        }
+        //public void SetTestsforUser(User user)
+        //{
+        //    Tests = _unitOfWork.TestRepository.All().Where(test => test.User.Login == user.Login).ToList();
+        //}
 
     }
 }

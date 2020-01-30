@@ -16,10 +16,10 @@ namespace WebDBApp.Interfaces
         CalendarEventsRepository CalendarEventsRepository { get; set; }
         AccessoryRepository AccessoryRepository { get; set; }
         EventTypeRepository EventTypeRepository { get; set; }
-        HallRepository HallRepository { get; set; }
+        RoomRepository RoomRepository { get; set; }
         OrderRepository OrderRepository { get; set; }
-        GymRepository GymRepository { get; set; }
-        TestRepository TestRepository { get; set; }
+        BuildingRepository BuildingRepository { get; set; }
+        //TestRepository TestRepository { get; set; }
         void SaveChanges();
     }
 }

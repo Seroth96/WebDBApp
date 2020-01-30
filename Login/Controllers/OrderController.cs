@@ -47,14 +47,17 @@ namespace Login.Controllers
         }
 
         [HttpGet]
-        [CheckSession(Role = new string[] { "Trener" })]
+        [CheckSession(Role = new string[] { "Organizator" })]
         public ActionResult NewOrder()
         {
             var viewModel = new NewOrderViewModel();
+
+            viewModel.SelectedBuilding = 0;
+            viewModel.Buildings = _unitOfWork.BuildingRepository.All();
             return View(viewModel);
         }
         
-        [CheckSession(Role = new string[] { "Pracownik" })]
+        [CheckSession(Role = new string[] { "Administrator" })]
         public ActionResult AcceptOrder(int id)
         {
             var order = _unitOfWork.OrderRepository.Find(id);
@@ -65,7 +68,7 @@ namespace Login.Controllers
             return RedirectToAction("Index");
         }
 
-        [CheckSession(Role = new string[] { "Pracownik" })]
+        [CheckSession(Role = new string[] { "Administrator" })]
         public ActionResult RejectOrder(int id)
         {
             var order = _unitOfWork.OrderRepository.Find(id);
@@ -82,7 +85,6 @@ namespace Login.Controllers
         {
             try
             {
-
                 var login = SessionHelper.GetElement<string>(SessionElement.Login);
                 _unitOfWork.OrderRepository.Add(new WebDBApp.Models.Order
                 {
@@ -93,8 +95,10 @@ namespace Login.Controllers
                     {
                         Amount = viewModel.Amount,
                         Description = viewModel.Description,
-                        
-                    }
+
+                    },
+                    Building = _unitOfWork.BuildingRepository.Find(viewModel.SelectedBuilding),
+                    Room = _unitOfWork.RoomRepository.Find(viewModel.SelectedRoom)
                 });
 
                 _unitOfWork.SaveChanges();
@@ -110,21 +114,25 @@ namespace Login.Controllers
 
 
         [HttpGet]
-        [CheckSession(Role = new string[] { "Trener" })]
+        [CheckSession(Role = new string[] { "Organizator" })]
         public ActionResult EditOrder(int id)
         {
             var viewModel = new NewOrderViewModel();
             var order = _unitOfWork.OrderRepository.Find(id);
+
+            viewModel.Buildings = _unitOfWork.BuildingRepository.All();
             viewModel.ID = order.ID;
             viewModel.Title = order.Title;
             viewModel.Description = order.OrderDetails.Description;
             viewModel.Amount = order.OrderDetails.Amount;
+            viewModel.SelectedBuilding = order.Building.ID;
+            viewModel.SelectedRoom = order.Room.ID;
 
             return View(viewModel);
         }
 
         [HttpPost]
-        [CheckSession(Role = new string[] { "Trener" })]
+        [CheckSession(Role = new string[] { "Organizator" })]
         public ActionResult EditOrder(NewOrderViewModel viewModel)
         {
             if (ModelState.IsValid)
@@ -137,6 +145,8 @@ namespace Login.Controllers
                 order.OrderDetails.Description = viewModel.Description;
                 order.OrderDetails.IsCompleted = false;
                 order.OrderDetails.IsRejected = false;
+                order.Building.ID = viewModel.SelectedBuilding;
+                order.Room.ID = viewModel.SelectedRoom;
 
 
                 _unitOfWork.SaveChanges();
@@ -147,13 +157,15 @@ namespace Login.Controllers
         }
 
         [HttpPost]
-        [CheckSession(Role = new string[] { "Trener" })]
+        [CheckSession(Role = new string[] { "Organizator" })]
         public ActionResult DeleteOrder(int id)
         {
             if (ModelState.IsValid)
             {
                 var oldOrder = _unitOfWork.OrderRepository.Find(id);
                 oldOrder.OrderDetails = null;
+                oldOrder.Building = null;
+                oldOrder.Room = null;
                 _unitOfWork.OrderRepository.Remove(id);
 
 

@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace WebDBApp.ViewModels
 {
-    public class GymViewModel
+    public class BuildingViewModel
     {
         [Required]
         public int ID { get; set; }

@@ -14,11 +14,11 @@ namespace WebDBApp.Database
         public DbSet<CalendarEvent> CalendarEvents { get; set; }
         public DbSet<EventType> EventTypes { get; set; }
         public DbSet<Accessory> Accessories { get; set; }
-        public DbSet<Hall> Halls { get; set; }
+        public DbSet<Room> Rooms { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetails> OrderDetails { get; set; }
-        public DbSet<Gym> Gyms { get; set; }
-        public DbSet<GymDetails> GymDetails { get; set; }
+        public DbSet<Building> Buildings { get; set; }
+        public DbSet<BuildingDetails> BuildingDetails { get; set; }
 
         public AppDbContext()
             : base("DBContext")

@@ -93,7 +93,7 @@ namespace WebDBApp.Controllers
         {
             try
             {
-                var role = _unitOfWork.RoleRepository.Find("Klient");
+                var role = _unitOfWork.RoleRepository.Find("Użytkownik");
                 _unitOfWork.UserRepository.Add(viewModel,role);
                 
                 EmailHelper.SendEmail(new EmailAccount()

@@ -22,7 +22,7 @@
                 Amount  
             </th>
             <th>
-                Trainer
+                Owner
             </th>
             <th>Status</th>
             <th></th>
@@ -42,7 +42,7 @@
             <td>
                 @Html.DisplayFor(modelItem => order.User.FullName)
             </td>
-            @if(role == "Pracownik" || role =="Administrator")
+            @if(role =="Administrator")
             {   
             <td>         
                 <a href="@Url.Action("AcceptOrder", "Order" , new { id=order.ID })">
@@ -57,7 +57,7 @@
                 </a>
             </td>
             }
-            else if(role == "Trener")
+            else if(role == "Organizator")
             {
             <td>
                @if(order.OrderDetails.IsRejected)

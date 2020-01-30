@@ -17,6 +17,10 @@ namespace WebDBApp.Models
 
         [Required]
         public DateTime Date { get; set; }
+        [Required]
+        public Building Building { get; set; }
+        [Required]
+        public Room Room { get; set; }
 
         public virtual User User { get; set; }
 

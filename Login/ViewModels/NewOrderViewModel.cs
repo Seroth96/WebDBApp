@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebDBApp.Models;
 
 namespace WebDBApp.ViewModels
 {
@@ -19,5 +20,10 @@ namespace WebDBApp.ViewModels
         public int Amount { get; set; }
         public bool IsCompleted { get; set; } = false;
         public bool IsRejected { get; set; } = false;
+
+        public IEnumerable<Building> Buildings { get; set; }
+        public int SelectedBuilding { get; set; }
+        public int SelectedRoom { get; set; }
+
     }
 }

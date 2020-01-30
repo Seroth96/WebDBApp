@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -25,6 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,16 +47,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -162,7 +161,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\AccessoryController.cs" />
-    <Compile Include="Controllers\HallController.cs" />
+    <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -172,8 +171,8 @@
     <Compile Include="DAL\AccessoryRepository.cs" />
     <Compile Include="DAL\CalendarEventsRepository.cs" />
     <Compile Include="DAL\EventTypeRepository.cs" />
-    <Compile Include="DAL\HallRepository.cs" />
-    <Compile Include="DAL\GymRepository.cs" />
+    <Compile Include="DAL\RoomRepository.cs" />
+    <Compile Include="DAL\BuildingRepository.cs" />
     <Compile Include="DAL\TestRepository.cs" />
     <Compile Include="DAL\OrderRepository.cs" />
     <Compile Include="DAL\Repository.cs" />
@@ -181,27 +180,6 @@
     <Compile Include="DAL\RoleRepository.cs" />
     <Compile Include="DAL\UserRepository.cs" />
     <Compile Include="Database\AppDbContext.cs" />
-    <Compile Include="Database\GymDetails.cs">
-      <DependentUpon>ProcedureModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\Gyms.cs">
-      <DependentUpon>ProcedureModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\ProcedureModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProcedureModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\ProcedureModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProcedureModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\ProcedureModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProcedureModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Enum\SessionElement.cs" />
     <Compile Include="Extensions\EnumExtension.cs" />
     <Compile Include="Extensions\SessionExtension.cs" />
@@ -215,14 +193,26 @@
     <Compile Include="Interfaces\IHashHelper.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Migrations\202001290041252_first.cs" />
+    <Compile Include="Migrations\202001290041252_first.designer.cs">
+      <DependentUpon>202001290041252_first.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001292128007_FK.cs" />
+    <Compile Include="Migrations\202001292128007_FK.designer.cs">
+      <DependentUpon>202001292128007_FK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001292243106_FK2.cs" />
+    <Compile Include="Migrations\202001292243106_FK2.designer.cs">
+      <DependentUpon>202001292243106_FK2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Test.cs" />
     <Compile Include="Models\Accessory.cs" />
     <Compile Include="Models\CalendarEvent.cs" />
     <Compile Include="Models\EventType.cs" />
-    <Compile Include="Models\Gym.cs" />
-    <Compile Include="Models\GymDetails.cs" />
-    <Compile Include="Models\Hall.cs" />
+    <Compile Include="Models\Building.cs" />
+    <Compile Include="Models\BuildingDetails.cs" />
+    <Compile Include="Models\Room.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetails.cs" />
     <Compile Include="Models\Role.cs" />
@@ -232,14 +222,14 @@
     <Compile Include="ViewModels\EditUserViewModel.cs" />
     <Compile Include="ViewModels\CalendarEventsViewModel.cs" />
     <Compile Include="ViewModels\NewAccessoryViewModel.cs" />
-    <Compile Include="ViewModels\NewHallViewModel.cs" />
-    <Compile Include="ViewModels\HallViewModel.cs" />
+    <Compile Include="ViewModels\NewRoomViewModel.cs" />
+    <Compile Include="ViewModels\RoomViewModel.cs" />
     <Compile Include="ViewModels\NewOrderViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\NewCalendarEventViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\ManageUsersViewModel.cs" />
-    <Compile Include="ViewModels\GymViewModel.cs" />
+    <Compile Include="ViewModels\BuildingViewModel.cs" />
     <Compile Include="ViewModels\TestsViewModel.cs" />
     <Compile Include="ViewModels\ResetPasswordRequestViewModel.cs" />
     <Compile Include="Models\User.cs" />
@@ -307,16 +297,6 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
-    <Content Include="Database\ProcedureModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProcedureModel.edmx</DependentUpon>
-      <LastGenOutput>ProcedureModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Database\ProcedureModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProcedureModel.edmx</DependentUpon>
-      <LastGenOutput>ProcedureModel.cs</LastGenOutput>
-    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1134,13 +1114,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <EntityDeploy Include="Database\ProcedureModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ProcedureModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Database\ProcedureModel.edmx.diagram">
-      <DependentUpon>ProcedureModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
@@ -1354,7 +1327,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\NewGym.cshtml" />
+    <Content Include="Views\Home\NewBuilding.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\PartialViews\Loading.cshtml" />
@@ -1368,16 +1341,16 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Home\EditGym.cshtml" />
+    <Content Include="Views\Home\EditBuilding.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Order\EditOrder.cshtml" />
     <Content Include="Views\Order\NewOrder.cshtml" />
     <Content Include="Views\Calendar\NewEvent.cshtml" />
-    <Content Include="Views\Calendar\TrainerEvent.cshtml" />
+    <Content Include="Views\Calendar\OwnerEvent.cshtml" />
     <Content Include="Views\Calendar\EditEvent.cshtml" />
-    <Content Include="Views\Hall\EditHall.cshtml" />
-    <Content Include="Views\Hall\NewHall.cshtml" />
-    <Content Include="Views\Hall\Index.cshtml" />
+    <Content Include="Views\Room\EditRoom.cshtml" />
+    <Content Include="Views\Room\NewRoom.cshtml" />
+    <Content Include="Views\Room\Index.cshtml" />
     <Content Include="Views\Accessory\EditAccessory.cshtml" />
     <Content Include="Views\Accessory\NewAccessory.cshtml" />
     <Content Include="Views\Tests\Index.cshtml" />
@@ -1390,6 +1363,7 @@
     <Content Include="Views\Tests\StepTest.cshtml" />
     <Content Include="Views\Tests\TestBrzuszkow.cshtml" />
     <Content Include="Views\Tests\TestPompkowy.cshtml" />
+    <Content Include="Views\Profile\Test.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -1402,6 +1376,17 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202001290041252_first.resx">
+      <DependentUpon>202001290041252_first.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001292128007_FK.resx">
+      <DependentUpon>202001292128007_FK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001292243106_FK2.resx">
+      <DependentUpon>202001292243106_FK2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -1437,7 +1422,10 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

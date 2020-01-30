@@ -27,11 +27,14 @@ namespace Login.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var viewModel = new ProfileViewModel(_unitOfWork);
+            //var viewModel = new ProfileViewModel(_unitOfWork);
             var login = SessionHelper.GetElement<string>(SessionElement.Login);
             var user = _unitOfWork.UserRepository.Find(login);
 
-            viewModel.SetTestsforUser(user);//All orders for current user
+            // viewModel.SetTestsforUser(user);//All orders for current user
+
+            var viewModel = new CalendarEventsViewModel(_unitOfWork);
+            viewModel.SetEventsForUser(user);
 
             return View(viewModel);
         }        
